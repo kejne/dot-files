@@ -1,0 +1,5 @@
+alias vpn-on='protonvpn-cli c -f'
+alias vpn-no='protonvpn-cli d'
+
+alias zshconfig="vim ~/.zshrc"
+
