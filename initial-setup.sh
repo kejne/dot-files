@@ -26,4 +26,6 @@ echo "####################################################"
 
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-cp -f .zshrc ~/.zshrc
+rm ~/.zshrc
+cd ~
+ln -s ~/.myconfig/ubuntu-setup/.zshrc
