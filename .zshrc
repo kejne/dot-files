@@ -8,3 +8,5 @@ plugins=(git pip zsh-navigation-tools zsh_reload autojump zsh-navigation-tools z
 
 source $ZSH/oh-my-zsh.sh
 source $MYCONFIG/aliases
+source $MYCONFIG/git-functions
+source $MYCONFIG/general-functions

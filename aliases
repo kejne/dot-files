@@ -3,3 +3,7 @@ alias vpn-no='protonvpn-cli d'
 
 alias zshconfig="vim ~/.zshrc"
 
+
+#GIT
+
+alias gitb='git checkout -b'
