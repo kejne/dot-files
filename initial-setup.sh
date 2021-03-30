@@ -10,7 +10,7 @@ echo "####################################################"
 echo "#   2. Installing packages                         #"
 echo "####################################################"
 
-sudo apt install p7zip-full libsecret-tools git openjdk-11-jdk maven python3 python3-pip python-is-python3 zsh curl fonts-powerline flameshot -y
+sudo apt install p7zip-full libsecret-tools git openjdk-11-jdk maven python3 python3-pip python-is-python3 zsh curl fonts-powerline flameshot fzf autojump -y
 
 sudo snap install code --classic
 sudo snap install intellij-idea-community --classic
