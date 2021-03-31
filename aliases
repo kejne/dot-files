@@ -8,3 +8,9 @@ alias ...='cd ../..'
 #GIT
 
 alias gitb='git checkout -b'
+
+
+#MAVEN
+
+alias mci='mvn clean install'
+alias mdt='mvn dependency:tree'
