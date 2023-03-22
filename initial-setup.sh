@@ -13,8 +13,6 @@ echo "####################################################"
 sudo apt install p7zip-full libsecret-tools git openjdk-11-jdk maven python3 python3-pip python-is-python3 zsh curl fonts-powerline flameshot fzf autojump -y
 
 sudo snap install code --classic
-sudo snap install intellij-idea-community --classic
-sudo snap install pycharm-community --classic
 
 wget -q -O - https://repo.protonvpn.com/debian/public_key.asc | sudo apt-key add -
 sudo add-apt-repository 'deb https://repo.protonvpn.com/debian unstable main'
@@ -29,3 +27,4 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 rm ~/.zshrc
 cd ~
 ln -s ~/.myconfig/ubuntu-setup/.zshrc
+cp ~/.myconfig/ubuntu-setup/agnoster-kejne.zsh-theme ~/.oh-my-zsh/themes/

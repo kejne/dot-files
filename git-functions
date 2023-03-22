@@ -8,7 +8,7 @@ gitpush () {
 # When a PR is merged, this cleans up your local environment
 gitdone () {
   getbranch
-  git switch master
+  git switch main
   git pull
   git branch -d $branchvar
 }
@@ -32,9 +32,6 @@ push-all () {
      exit 1;
   fi
 
-  gettask
-  build-commit-message $1
-
   git add .
   git commit -m $1
   git push
@@ -43,7 +40,7 @@ push-all () {
 #Push all to new upstream
 push-new-pr-all () {
   if [ "$#" -ne 2 ]; then
-     echo "Usage example: push-new-pr-all CDIS_BOX-1234 \"Commit message\""
+     echo "Usage example: push-new-pr-all WORK_PACKAGE_001 \"Commit message\""
      exit 1;
   fi
   
