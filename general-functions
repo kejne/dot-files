@@ -16,3 +16,7 @@ fsudo-setup () {
   echo $PASS | sudo -S apt install libsecret-tools -y
   echo $PASS | secret-tool store --label="fsudo" fsudo fsudo
 }
+
+kvim () {
+  kitty nvim &
+}

@@ -1,4 +1,5 @@
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/go/bin:/usr/bin:$PATH
+export GOBIN=$HOME/go/bin
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/go/bin:/usr/bin:$GOBIN:$PATH
 
 export ZSH="/home/kejne/.oh-my-zsh"
 MYCONFIG='/home/kejne/.myconfig/ubuntu-setup'
