@@ -1,0 +1,51 @@
+general {
+  colors = true
+  color_good = "#a3be8c"
+  color_degraded = "#ebcb8b"
+  color_bad = "#bf616a"
+  interval = 1
+  separator = "|"
+}
+
+order += "tztime local"
+order += "cpu_usage"
+order += "memory"
+order += "battery 0"
+
+disk "/" {
+  format = "/: %percentage_used"
+}
+
+cpu_usage {
+  format = "Cpu: %usage"
+  degraded_threshold = 90
+  max_threshold = 95
+}
+
+ethernet enx98e743dab100 {
+  format_up = "ETH: %ip (%speed)"
+  format_down = "ETH: down"
+}
+
+wireless __first__ {
+  format_up = "WLS: (%quality at %ssid)"
+  format_down  = "WLS: down"
+}
+
+battery 0 {
+  path=/sys/class/power_supply/BAT%d/uevent
+  format = "%percentage"
+  last_full_capacity = true
+  threshold_type=percentage
+  low_threshold=10
+}
+
+memory {
+  memory_used_method = classical
+  format="Mem: %used"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M"
+        /* hide_if_equals_localtime = true */
+}
