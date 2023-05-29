@@ -46,7 +46,6 @@ M.mason = {
     "helm-ls",
     "golangci-lint",
     "tflint",
-    "delve",
     "bash-language-server",
     "yaml-language-server",
     "jsonlint"

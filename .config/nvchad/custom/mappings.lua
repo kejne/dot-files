@@ -11,7 +11,8 @@ M.disabled = {
       ["<C-l>"] = "",
       ["<C-n>"] = "",
       ["<leader>l"] = "",
-      ["<leader>e>"] = ""
+      ["<leader>e"] = "",
+      ["<leader>fb"] = ""
   }
 }
 
@@ -30,6 +31,8 @@ M.general = {
     ["<leader>gt"] = { ":GoAlternate<CR>", "Open test/main", opts = { nowait = true } },
     ["<leader>tf"] = { ":GoTestFunc<CR>", "Run Test Func", opts = { nowait = true } },
     ["<leader>t"] = { ":GoTest<CR>", "Run all tests", opts = { nowait = true } },
+    ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
+    ["<leader>rt"] = {"<Plug>RestNvim","Do Rest Call"},
   },
 }
 
