@@ -8,6 +8,12 @@ local plugins = {
     "nvim-lua/plenary.nvim"
   },
   {
+    "ThePrimeagen/vim-be-good", lazy = false
+  },
+  {
+    "ThePrimeagen/harpoon", lazy = false
+  },
+  {
     "tpope/vim-fugitive", lazy = false
   },
   {

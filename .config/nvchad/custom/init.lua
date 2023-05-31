@@ -1,3 +1,4 @@
+vim.wo.relativenumber = true
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "yaml",
   callback = function ()
