@@ -23,7 +23,6 @@ M.general = {
     ["<leader>j"] = { "<C-w>j", "window down" },
     ["<leader>k"] = { "<C-w>k", "window up" },
     ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "toggle nvimtree" },
-    [";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<C-u>"] = { "<C-u>zz", "Go up", opts = { nowait = true } },
     ["<C-d>"] = { "<C-d>zz", "Go down", opts = { nowait = true } },
     ["<leader>v"] = { ":vsplit<CR>", "Split screen", opts = { nowait = true } },

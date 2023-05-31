@@ -8,6 +8,9 @@ local plugins = {
     "nvim-lua/plenary.nvim"
   },
   {
+    "tpope/vim-fugitive", lazy = false
+  },
+  {
     "rest-nvim/rest.nvim",
     lazy = false,
     requires = { "nvim-lua/plenary.nvim" },
