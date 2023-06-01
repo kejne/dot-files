@@ -11,7 +11,13 @@ local plugins = {
     "ThePrimeagen/vim-be-good", lazy = false
   },
   {
-    "ThePrimeagen/harpoon", lazy = false
+    "ThePrimeagen/harpoon", lazy = false,
+    config = function()
+      require("harpoon").setup({
+        tabline = true,
+        tabline_suffix = " %m "
+      })
+    end
   },
   {
     "tpope/vim-fugitive", lazy = false
