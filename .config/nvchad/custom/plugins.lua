@@ -15,6 +15,7 @@ local plugins = {
     config = function()
       require("harpoon").setup({
         tabline = true,
+        tabline_prefix = " %m ",
         tabline_suffix = " %m "
       })
     end

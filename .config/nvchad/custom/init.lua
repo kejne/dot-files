@@ -2,6 +2,7 @@ vim.cmd([[
 :highlight ExtraWhitespace ctermbg=Gray guibg=Gray
 :match ExtraWhitespace /\s\+$/
 ]])
+vim.cmd("let g:go_addtags_transform = 'camelcase'")
 vim.cmd([[
 	augroup CustomHI
 		autocmd!
