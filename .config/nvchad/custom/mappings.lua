@@ -10,6 +10,7 @@ M.disabled = {
       ["<C-j>"] = "",
       ["<C-l>"] = "",
       ["<C-n>"] = "",
+      ["<C-s>"] = "",
       ["<leader>l"] = "",
       ["<leader>e"] = "",
       ["<leader>fb"] = ""
@@ -17,6 +18,9 @@ M.disabled = {
 }
 
 M.general = {
+  i = {
+    ["<C-s>"] = { "<ESC>:wa<CR>", "Save all", opts = { nowait = true } },
+  },
   n = {
     ["<leader>h"] = { "<C-w>h", "window left" },
     ["<leader>l"] = { "<C-w>l", "window right" },
@@ -30,6 +34,7 @@ M.general = {
     ["<leader>1"] = { ":lua require(\"harpoon.ui\").nav_file(1)<CR>", "Harpoon 1", opts = { nowait = true } },
     ["<leader>2"] = { ":lua require(\"harpoon.ui\").nav_file(2)<CR>", "Harpoon 2", opts = { nowait = true } },
     ["<leader>3"] = { ":lua require(\"harpoon.ui\").nav_file(3)<CR>", "Harpoon 3", opts = { nowait = true } },
+    ["<C-s>"] = { ":wa<CR>", "Save all", opts = { nowait = true } },
     ["<C-u>"] = { "<C-u>zz", "Go up", opts = { nowait = true } },
     ["<C-d>"] = { "<C-d>zz", "Go down", opts = { nowait = true } },
     ["<leader>v"] = { ":vsplit<CR>", "Split screen", opts = { nowait = true } },
