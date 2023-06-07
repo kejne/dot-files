@@ -26,6 +26,8 @@ M.general = {
     ["<leader>l"] = { "<C-w>l", "window right" },
     ["<leader>j"] = { "<C-w>j", "window down" },
     ["<leader>k"] = { "<C-w>k", "window up" },
+
+    ["<leader>fc"] = { ":NvimTreeFindFile<CR>", "Show open file in tree" },
     ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "toggle nvimtree" },
     ["<leader>m"] = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon", opts = { nowait = true } },
     ["<S-Tab>"] = { ":lua require(\"harpoon.ui\").nav_prev()<CR>", "Prev Harpoon", opts = { nowait = true } },
