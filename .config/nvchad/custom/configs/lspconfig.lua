@@ -5,7 +5,7 @@ local lspconfig = require "lspconfig"
 local configs = require "lspconfig.configs"
 local util = require "lspconfig.util"
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "gopls", "terraformls", "bashls", "bufls"}
+local servers = { "html", "cssls", "tsserver", "terraformls", "bashls", "bufls"}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -31,5 +31,8 @@ lspconfig.helm_ls.setup {
   cmd = {"helm_ls", "serve"},
 }
 
--- 
--- lspconfig.pyright.setup { blabla}
+lspconfig.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd_env = {GOFLAGS="-tags=integration"},
+}
