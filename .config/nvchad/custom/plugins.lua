@@ -8,6 +8,22 @@ local plugins = {
     "nvim-lua/plenary.nvim"
   },
   {
+    "ThePrimeagen/vim-be-good", lazy = false
+  },
+  {
+    "ThePrimeagen/harpoon", lazy = false,
+    config = function()
+      require("harpoon").setup({
+        tabline = true,
+        tabline_prefix = " %m ",
+        tabline_suffix = " %m "
+      })
+    end
+  },
+  {
+    "tpope/vim-fugitive", lazy = false
+  },
+  {
     "rest-nvim/rest.nvim",
     lazy = false,
     requires = { "nvim-lua/plenary.nvim" },

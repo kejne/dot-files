@@ -18,7 +18,8 @@ M.treesitter = {
     "terraform",
     "json",
     "bash",
-    "yaml"
+    "yaml",
+    "proto"
   },
   indent = {
     enable = true,
@@ -48,7 +49,8 @@ M.mason = {
     "tflint",
     "bash-language-server",
     "yaml-language-server",
-    "jsonlint"
+    "jsonlint",
+    "buf-language-server"
   },
 }
 
