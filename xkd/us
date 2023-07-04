@@ -9,8 +9,8 @@ xkb_symbols "kaj_custom" {
     include "us(basic)"
     key <PGUP> {	[     grave,	asciitilde	]	};
     key <PGDN> {	[     End,	End		]	};
-    key <AC10> {	[ semicolon,	colon,	U00E4,	U00C4	]	};
-    key <AC11> {	[ apostrophe,	quotedbl,	U00F6,	U00D6	]	};
+    key <AC10> {	[ semicolon,	colon,	U00F6,	U00D6	]	};
+    key <AC11> {	[ apostrophe,	quotedbl,	U00E4,	U00C4	]	};
     key <AD11> {	[ bracketleft,	braceleft,	U00E5,	U00C5	]	};
     include "level3(ralt_switch)"
 };
