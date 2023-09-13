@@ -11,7 +11,8 @@ M.ui = {
   hl_add = highlights.add,
   tabufline = {
     enabled = false
-  }
+  },
+  transparency = true
 }
 
 M.plugins = "custom.plugins"
