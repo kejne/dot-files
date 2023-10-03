@@ -8,6 +8,24 @@ local plugins = {
     "nvim-lua/plenary.nvim"
   },
   {
+    "ThePrimeagen/refactoring.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("refactoring").setup({
+        prompt_func_return_type = {
+          go = true,
+        },
+        prompt_func_param_type = {
+            go = true,
+        },
+      })
+    end,
+  },
+  {
     "ThePrimeagen/vim-be-good", lazy = false
   },
   {

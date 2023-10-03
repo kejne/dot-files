@@ -41,13 +41,21 @@ M.general = {
     ["<C-d>"] = { "<C-d>zz", "Go down", opts = { nowait = true } },
     ["<leader>v"] = { ":vsplit<CR>", "Split screen", opts = { nowait = true } },
     ["gr"] = { ":GoReferrers<CR>", "Go to referrers", opts = { nowait = true } },
-    ["<leader>gt"] = { ":GoAlternate<CR>", "Open test/main", opts = { nowait = true } },
+    ["ga"] = { ":GoAlternate<CR>", "Open test/main", opts = { nowait = true } },
     ["<leader>tf"] = { ":GoTestFunc<CR>", "Run Test Func", opts = { nowait = true } },
     ["<leader>t"] = { ":GoTest<CR>", "Run all tests", opts = { nowait = true } },
     ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
     ["<leader>rt"] = {"<Plug>RestNvim","Do Rest Call"},
     ["<leader>xx"] = {":%bd|e#<CR>","Close all other buffers"},
+    ["<leader>rr"] = {":lua require('refactoring').select_refactor()<CR>"},
+    ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
+    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"}
   },
+  x = {
+    ["<leader>rr"] = {":lua require('refactoring').select_refactor()<CR>"},
+    ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
+    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"}
+  }
 }
 
 -- more keybinds!
