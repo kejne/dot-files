@@ -41,12 +41,14 @@ M.general = {
 
     ["<C-u>"] = { "<C-u>zz", "Go up", opts = { nowait = true } },
     ["<C-d>"] = { "<C-d>zz", "Go down", opts = { nowait = true } },
+    [ "<leader>o"] = { ":Neorg index<CR>", "Neorg index" },
+    [ "<leader>or"] = { ":Neorg return<CR>","Neorg return" },
 
     ['zR'] = {":lua require('ufo').openAllFolds()<CR>"},
     ['zM'] = {":lua require('ufo').closeAllFolds()<CR>"},
     ["<leader>e"] = { ":Neotree toggle<CR>", "toggle explorer" },
     ["<leader>s"] = {":%s/","Substitute"},
-    ["<leader>gg"] = {":Neogit kind=vsplit<CR>"},
+    -- ["<leader>gg"] = {":Neogit kind=vsplit<CR>"},
 
     ["<leader>m"] = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon", opts = { nowait = true } },
     ["<S-Tab>"] = { ":lua require(\"harpoon.ui\").nav_prev()<CR>", "Prev Harpoon", opts = { nowait = true } },
