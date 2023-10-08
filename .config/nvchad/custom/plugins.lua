@@ -1,11 +1,56 @@
 local overrides = require("custom.configs.overrides")
 
+local foldHandler = function(virtText, lnum, endLnum, width, truncate)
+    local newVirtText = {}
+    local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+    local sufWidth = vim.fn.strdisplaywidth(suffix)
+    local targetWidth = width - sufWidth
+    local curWidth = 0
+    for _, chunk in ipairs(virtText) do
+        local chunkText = chunk[1]
+        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+        if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+        else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, {chunkText, hlGroup})
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            -- str width returned from truncate() may less than 2nd argument, need padding
+            if curWidth + chunkWidth < targetWidth then
+                suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+        end
+        curWidth = curWidth + chunkWidth
+    end
+    table.insert(newVirtText, {suffix, 'MoreMsg'})
+    return newVirtText
+end
+
 ---@type NvPluginSpec[]
 local plugins = {
-
+  {
+    'kevinhwang91/nvim-ufo',
+    lazy = false,
+    requires = 'kevinhwang91/promise-async',
+    config = function()
+      require('ufo').setup({
+        fold_virt_text_handler = foldHandler,
+        provider_selector = function(bufnr, filetype, buftype)
+            return {'treesitter', 'indent'}
+        end
+       })
+    end,
+  },
   -- Override plugin definition options
   {
-    "nvim-lua/plenary.nvim"
+    'kevinhwang91/promise-async',
+    lazy = true,
+  },
+  {
+    "nvim-lua/plenary.nvim",
+    lazy = true,
   },
   {
     "ThePrimeagen/refactoring.nvim",
@@ -26,9 +71,6 @@ local plugins = {
     end,
   },
   {
-    "ThePrimeagen/vim-be-good", lazy = false
-  },
-  {
     "ThePrimeagen/harpoon", lazy = false,
     config = function()
       require("harpoon").setup({
@@ -39,11 +81,42 @@ local plugins = {
     end
   },
   {
+    "NeogitOrg/neogit",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    config = true
+  },
+  {
     "tpope/vim-fugitive", lazy = false
   },
   {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    ft = "norg",
+    config = function()
+      require("neorg").setup {
+        load = {
+          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = { -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                notes = "~/notes",
+              },
+            },
+          },
+        },
+      }
+    end,
+  },
+  {
     "rest-nvim/rest.nvim",
-    lazy = false,
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
       require("rest-nvim").setup({
@@ -99,10 +172,12 @@ local plugins = {
     end, -- Override to setup mason-lspconfig
   },
   {
-    "fatih/vim-go", lazy = false
+    "fatih/vim-go",
+    ft = "go",
   },
   {
-    "towolf/vim-helm", lazy = false
+    "towolf/vim-helm",
+    ft = "yml",
   },
   -- override plugin configs
   {
@@ -114,11 +189,20 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
   },
-
   {
-    "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
+      "nvim-neo-tree/neo-tree.nvim",
+      lazy = false,
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim",
+      }
   },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   opts = overrides.nvimtree,
+  -- },
 
   -- Install a plugin
   {
@@ -128,20 +212,6 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
-
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
-
-  -- All NvChad plugins are lazy-loaded by default
-  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   lazy = false,
-  -- }
 }
 
 return plugins

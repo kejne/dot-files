@@ -32,3 +32,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   })
 vim.api.nvim_set_option("clipboard","unnamed")
+vim.opt.clipboard = "unnamedplus"
+
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true

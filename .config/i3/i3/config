@@ -23,10 +23,9 @@ font pango:JetBrainsMono Nerd Font 10
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex-autostart --autostart --environment i3
-exec --no-startup-id feh --bg-scale ~/Pictures/BrfjSEA-system-shock-wallpaper.jpg
 exec --no-startup-id flameshot
 exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
-exec --no-startup-id feh --bg-scale --zoom fill ~/Pictures/vim-shortcuts.jpg
+exec --no-startup-id feh --bg-scale --zoom fill /home/kejne/Pictures/sorceress.jpg
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -58,7 +57,8 @@ bindsym $mod+m exec --no-startup-id ~/.local/bin/emoji
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 #tiling_drag modifier titlebar
-
+# gaps outer 5px
+# gaps inner 5px
 # start a terminal
 bindsym $mod+Return exec kitty zsh
 
