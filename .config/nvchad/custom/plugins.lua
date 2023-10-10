@@ -30,7 +30,179 @@ end
 
 ---@type NvPluginSpec[]
 local plugins = {
-  {  'kevinhwang91/nvim-ufo',
+  { "unamatasanatarai/nvim-md-todo-toggle",
+    lazy = false,
+	  ft = "md",
+    config = function ()
+     require("nvim-md-todo-toggle").setup()
+    end
+  },
+  {"hrsh7th/nvim-cmp",
+    config = function ()
+      local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+      local cmp = require("cmp")
+      cmp.setup({
+        matching = {
+          -- disallow_fuzzy_matching = false,
+          -- disallow_fullfuzzy_matching = true,
+          -- disallow_partial_fuzzy_matching = true,
+          -- disallow_partial_matching = true,
+          -- disallow_prefix_unmatching = false,
+        },
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        completion = {
+          keyword_length = 1,
+        },
+        window = {
+          documentation = {
+            border = border,
+            max_width = 80,
+            max_hight = 30,
+            winhighlight = "NormalFloat:NormalFloat,NonText:NonText,Special:Constant",
+          },
+          completion = {
+            border = border,
+            col_offset = 30,
+            side_padding = 0,
+            winhighlight = "NormalFloat:NormalFloat",
+          },
+        },
+        experimental = { ghost_text = true },
+        formatting = {
+          fields = { "abbr", "kind", "menu" },
+          format = function(entry, vim_item)
+            -- load lspkind icons
+            vim_item.menu = ({
+              nvim_lsp = "(LSP)",
+              emoji = "(Emoji)",
+              path = "(Path)",
+              calc = "(Calc)",
+              vsnip = "(Snippet)",
+              luasnip = "(Snippet)",
+              buffer = "(Buffer)",
+            })[entry.source.name]
+
+            return vim_item
+          end,
+        },
+        mapping = {
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
+          ["<C-n>"] = cmp.mapping.select_next_item(),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-2),
+          ["<C-d>"] = cmp.mapping.scroll_docs(2),
+          -- ["<C-l>"] = cmp.mapping.complete(),
+          ["<C-x>"] = cmp.mapping.close(),
+          ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          }),
+          ["<Tab>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+          ["<S-Tab>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end,
+        },
+        sources = { -- different source for the completion
+          {
+            name = "nvim_lsp",
+            max_item_count = 15,
+          },
+          {
+            name = "neorg",
+            keyword_length = 2,
+          },
+          {
+            name = "luasnip",
+            keyword_length = 2,
+          },
+          {
+            name = "buffer",
+            keyword_length = 2,
+          },
+          {
+            name = "nvim_lua",
+            keyword_length = 2,
+          },
+          {
+            name = "obsidian",
+          },
+          {
+            name = "obsidian_new",
+          },
+          {
+            name = "emoji",
+          },
+        },
+      })
+    end
+  },
+  {  "epwalsh/obsidian.nvim",
+    lazy = false,
+    event = {
+      "BufReadPre " .. vim.fn.expand("~") .. "/second-brain/**.md",
+      "BufNewFile " .. vim.fn.expand("~") .. "/second-brain/**.md",
+    },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim", -- optional
+      "hrsh7th/nvim-cmp",
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      dir = "~/second-brain",
+      daily_notes = {
+        -- Optional, if you keep daily notes in a separate directory.
+        folder = "notes/dailies",
+        -- Optional, if you want to change the date format for the ID of daily notes.
+        date_format = "%Y-%m-%d",
+        -- Optional, if you want to change the date format of the default alias of daily notes.
+        alias_format = "%B %-d, %Y",
+        -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+        template = nil,
+      },
+
+      -- Optional, completion.
+      completion = {
+        -- If using nvim-cmp, otherwise set to false
+        nvim_cmp = true,
+        -- Trigger completion at 2 chars
+        min_chars = 2,
+        -- Where to put new notes created from completion. Valid options are
+        --  * "current_dir" - put new notes in same directory as the current buffer.
+        --  * "notes_subdir" - put new notes in the default notes subdirectory.
+        new_notes_location = "current_dir",
+
+        -- Whether to add the output of the node_id_func to new notes in autocompletion.
+        -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
+        prepend_note_id = true
+      },     -- see below for full list of options 👇
+      overwrite_mappings = true
+    },
+  },
+  {  'godlygeek/tabular',
+    lazy = false
+  },
+  {  'plasticboy/vim-markdown',
+    branch = 'master',
+    require = {'godlygeek/tabular'},
+    lazy = false,
+    ft = "md"
+  },
+  {    'kevinhwang91/nvim-ufo',
     lazy = false,
     requires = 'kevinhwang91/promise-async',
     config = function()
@@ -89,33 +261,6 @@ local plugins = {
   },
   {    "tpope/vim-fugitive",
     lazy = false
-  },
-  {    "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-      { "<leader>oi", ":Neorg index<CR>", desc = "Neorg index" },
-      { "<leader>oj", ":Neorg journal today<CR>", desc = "Neorg journal" },
-      { "<leader>ok", ":Neorg journal ", desc = "Neorg journal" },
-    },
-    -- ft = "norg",
-    config = function()
-      require("neorg").setup {
-        load = {
-          ["core.defaults"] = {}, -- Loads default behaviour
-          ["core.concealer"] = {}, -- Adds pretty icons to your documents
-          ["core.dirman"] = { -- Manages Neorg workspaces
-            config = {
-              workspaces = {
-                notes = "~/second-brain",
-                work = "~/work-brain",
-              },
-              default_workspace = "notes"
-            },
-          },
-        },
-      }
-    end,
   },
   {    "rest-nvim/rest.nvim",
     keys = {

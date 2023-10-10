@@ -41,8 +41,6 @@ M.general = {
 
     ["<C-u>"] = { "<C-u>zz", "Go up", opts = { nowait = true } },
     ["<C-d>"] = { "<C-d>zz", "Go down", opts = { nowait = true } },
-    [ "<leader>or"] = { ":Neorg return<CR>","Neorg return" },
-    [ "<leader>ow"] = { ":Neorg workspace ", "Neorg workspace" },
 
     ['zR'] = {":lua require('ufo').openAllFolds()<CR>"},
     ['zM'] = {":lua require('ufo').closeAllFolds()<CR>"},
@@ -65,7 +63,12 @@ M.general = {
     ["<leader>rt"] = {"<Plug>RestNvim","Do Rest Call"},
     ["<leader>rr"] = {":lua require('refactoring').select_refactor()<CR>"},
     ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
-    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"}
+    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"},
+
+    ["<leader>o"] = { ":ObsidianQuickSwitch<CR>", "Obsidian quickswitch" },
+    ["<leader>n"] = { ":ObsidianSearch<CR>", "Obsidian Search" },
+    ["<leader>ta"] = { ":TDAdd<CR>", "Add MD task" },
+    ["<leader>tt"] = { ":TDToggle<CR>", "Toggle MD task" },
   },
   x = {
     ["<leader>rr"] = {":lua require('refactoring').select_refactor()<CR>"},
