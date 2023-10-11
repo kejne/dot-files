@@ -165,7 +165,7 @@ local plugins = {
       dir = "~/second-brain",
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
-        folder = "notes/dailies",
+        folder = "private/dailies",
         -- Optional, if you want to change the date format for the ID of daily notes.
         date_format = "%Y-%m-%d",
         -- Optional, if you want to change the date format of the default alias of daily notes.
@@ -174,6 +174,18 @@ local plugins = {
         template = nil,
       },
 
+      notes_subdir = "private/zettelkasten",
+      note_id_func = function(title)
+        if title ~= nil then
+          title = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+        end
+        return title
+      end,
+      follow_url_func = function(url)
+        -- Open the URL in the default web browser.
+        -- vim.fn.jobstart({"open", url})  -- Mac OS
+        vim.fn.jobstart({"browse", url})  -- linux
+      end,
       -- Optional, completion.
       completion = {
         -- If using nvim-cmp, otherwise set to false
@@ -183,12 +195,12 @@ local plugins = {
         -- Where to put new notes created from completion. Valid options are
         --  * "current_dir" - put new notes in same directory as the current buffer.
         --  * "notes_subdir" - put new notes in the default notes subdirectory.
-        new_notes_location = "current_dir",
+        new_notes_location = "notes_subdir",
 
         -- Whether to add the output of the node_id_func to new notes in autocompletion.
         -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
         prepend_note_id = true
-      },     -- see below for full list of options 👇
+      },
       overwrite_mappings = true
     },
   },
@@ -366,8 +378,7 @@ local plugins = {
               ["il"] = "@loop.inner",
               ["al"] = "@loop.outer",
               ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-            },
+              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" }, },
             selection_modes = {
               ['@parameter.outer'] = 'v', -- charwise
               ['@function.outer'] = 'V', -- linewise

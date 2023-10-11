@@ -65,6 +65,8 @@ M.general = {
     ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
     ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"},
 
+    ["<leader>oz"] = { ":ObsidianNew ", "New Zettel" },
+    ["<leader>oj"] = { ":ObsidianToday<CR>", "Journal" },
     ["<leader>gl"] = { ":ObsidianFollowLink<CR>", "Follow link" },
     ["<leader>gb"] = { ":ObsidianBacklinks<CR>", "Backlinks" },
     ["<leader>ta"] = { ":TDAdd<CR>", "Add MD task" },
