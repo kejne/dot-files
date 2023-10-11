@@ -320,7 +320,7 @@ local plugins = {
     end, -- Override to setup mason-lspconfig
   },
   {    "fatih/vim-go",
-    ft = "go",
+    ft = {"go","mod","sum"},
   },
   {    "towolf/vim-helm",
     ft = {"yml","yaml"},

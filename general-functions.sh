@@ -20,3 +20,12 @@ fsudo-setup () {
 kvim () {
   kitty nvim &
 }
+
+replace-all() {
+  if [ "$#" -ne 2 ]; then
+     echo "Usage example: replace-all <from> <to>"
+     exit 1;
+  fi
+  echo '$1 $2'
+  #find ./ -type f -exec sed -i -e 's/$0/$1/g' {} \;
+}
