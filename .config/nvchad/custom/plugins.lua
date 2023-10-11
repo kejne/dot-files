@@ -150,10 +150,9 @@ local plugins = {
     end
   },
   {  "epwalsh/obsidian.nvim",
-    lazy = false,
-    event = {
-      "BufReadPre " .. vim.fn.expand("~") .. "/second-brain/**.md",
-      "BufNewFile " .. vim.fn.expand("~") .. "/second-brain/**.md",
+    keys = {
+      { "<leader>o", ":ObsidianQuickSwitch<CR>", desc = "Obsidian quickswitch" },
+      { "<leader>n", ":ObsidianSearch<CR>", desc = "Obsidian Search" },
     },
     dependencies = {
       -- Required.

@@ -65,15 +65,17 @@ M.general = {
     ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
     ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"},
 
-    ["<leader>o"] = { ":ObsidianQuickSwitch<CR>", "Obsidian quickswitch" },
-    ["<leader>n"] = { ":ObsidianSearch<CR>", "Obsidian Search" },
+    ["<leader>gl"] = { ":ObsidianFollowLink<CR>", "Follow link" },
+    ["<leader>gb"] = { ":ObsidianBacklinks<CR>", "Backlinks" },
     ["<leader>ta"] = { ":TDAdd<CR>", "Add MD task" },
     ["<leader>tt"] = { ":TDToggle<CR>", "Toggle MD task" },
   },
   x = {
     ["<leader>rr"] = {":lua require('refactoring').select_refactor()<CR>"},
     ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
-    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"}
+    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"},
+    ["<leader>ol"] = { ":ObsidianLink<CR>", "To Link" },
+    ["<leader>on"] = { ":ObsidianLinkNew<CR>", "New Link" },
   }
 }
 
