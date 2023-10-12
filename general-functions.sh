@@ -22,10 +22,10 @@ kvim () {
 }
 
 replace-all() {
-  if [ "$#" -ne 2 ]; then
-     echo "Usage example: replace-all <from> <to>"
-     exit 1;
-  fi
-  echo '$1 $2'
-  #find ./ -type f -exec sed -i -e 's/$0/$1/g' {} \;
+  FROM=$1
+  TO=$2
+  PWD=$(pwd)
+
+  echo "Replacing all instances of <${FROM}> with <${TO}> in ${PWD}..."
+  find ./ -type f -exec sed -i -e "s/$FROM/$TO/g" {} \;
 }

@@ -5,12 +5,15 @@ alias zshconfig="vim ~/.zshrc"
 alias ..='cd ..'
 alias ...='cd ../..'
 
-#GIT
+alias sd='cd ~ && cd "~/$(find * -type d | fzf)"'
+alias home-monitors='xrandr --output DP-1-3-8 --left-of eDP-1 && xrandr --output DP-3 --left-of DP-1-3-8'
 
-alias gitb='git checkout -b'
-
-
-#MAVEN
-
-alias mci='mvn clean install'
-alias mdt='mvn dependency:tree'
+# Open Neovim at common repos
+alias pnc='cd ~/git/trident/pnc-service && nvim'
+alias scc='cd ~/git/trident/scc-service && nvim'
+alias tdocs='cd ~/second-brain/trident-docs && nvim'
+alias pdocs='cd ~/second-brain/private && nvim'
+alias docs='cd ~/second-brain && nvim'
+alias pdots='cd ~/.config/dotfiles/personal && nvim'
+alias tdots='cd ~/.config/dotfiles/team && nvim'
+alias dots='cd ~/.config/dotfiles && nvim'

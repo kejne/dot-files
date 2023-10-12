@@ -1,20 +1,19 @@
+export GOPRIVATE=github.com/cariad-odp/*
 export GOBIN=$HOME/go/bin
-export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/go/bin:/usr/bin:$GOBIN:$PATH
-
+export GOPATH=$HOME/go/bin
+export PATH=$PATH:$HOME/.local/go/bin:$HOME/go/bin
 export ZSH="$HOME/.oh-my-zsh"
-MYCONFIG="$HOME/dotfiles"
+DOTFILES="$HOME/.config/dotfiles"
 
+plugins=(z git pip zsh-navigation-tools zsh-interactive-cd terraform golang docker docker-compose zsh-vi-mode kubectl)
 ZSH_THEME="agnoster-kejne"
-plugins=(git pip z zsh-navigation-tools zsh-interactive-cd zsh-vi-mode)
+bindkey -v
 
 source $ZSH/oh-my-zsh.sh
-source $MYCONFIG/aliases
-source $MYCONFIG/git-functions
-source $MYCONFIG/general-functions
+source $DOTFILES/personal/aliases.sh
+source $DOTFILES/personal/git-functions.sh
+source $DOTFILES/personal/general-functions.sh
+source $DOTFILES/team/functions/functions
 
-alias vim=nvim
-
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
-
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(direnv hook zsh)"
