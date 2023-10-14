@@ -37,7 +37,14 @@ local plugins = {
      require("nvim-md-todo-toggle").setup()
     end
   },
+  {"hrsh7th/cmp-emoji",
+    lazy = true
+  },
   {"hrsh7th/nvim-cmp",
+    lazy = false,
+    dependencies = {
+      "hrsh7th/cmp-emoji"
+    },
     config = function ()
       local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
       local cmp = require("cmp")
@@ -81,7 +88,7 @@ local plugins = {
               emoji = "(Emoji)",
               path = "(Path)",
               calc = "(Calc)",
-              vsnip = "(Snippet)",
+              -- vsnip = "(Snippet)",
               luasnip = "(Snippet)",
               buffer = "(Buffer)",
             })[entry.source.name]
@@ -121,10 +128,6 @@ local plugins = {
             max_item_count = 15,
           },
           {
-            name = "neorg",
-            keyword_length = 2,
-          },
-          {
             name = "luasnip",
             keyword_length = 2,
           },
@@ -158,7 +161,7 @@ local plugins = {
       -- Required.
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim", -- optional
-      "hrsh7th/nvim-cmp",
+      -- "hrsh7th/nvim-cmp",
       -- see below for full list of optional dependencies 👇
     },
     opts = {
