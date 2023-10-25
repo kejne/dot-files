@@ -30,8 +30,13 @@ end
 
 ---@type NvPluginSpec[]
 local plugins = {
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
   { "unamatasanatarai/nvim-md-todo-toggle",
-    lazy = false,
+    event = "VeryLazy",
 	  ft = "md",
     config = function ()
      require("nvim-md-todo-toggle").setup()
@@ -41,7 +46,7 @@ local plugins = {
     lazy = true
   },
   {"hrsh7th/nvim-cmp",
-    lazy = false,
+    event = "VeryLazy",
     dependencies = {
       "hrsh7th/cmp-emoji"
     },
@@ -213,11 +218,10 @@ local plugins = {
   {  'plasticboy/vim-markdown',
     branch = 'master',
     require = {'godlygeek/tabular'},
-    lazy = false,
     ft = "md"
   },
   {    'kevinhwang91/nvim-ufo',
-    lazy = false,
+    event = "VeryLazy",
     requires = 'kevinhwang91/promise-async',
     config = function()
       require('ufo').setup({
@@ -233,23 +237,6 @@ local plugins = {
   },
   {    "nvim-lua/plenary.nvim",
     lazy = true,
-  },
-  {  "ThePrimeagen/refactoring.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("refactoring").setup({
-        prompt_func_return_type = {
-          go = true,
-        },
-        prompt_func_param_type = {
-            go = true,
-        },
-      })
-    end,
   },
   { "ThePrimeagen/harpoon",
     lazy = false,
@@ -334,10 +321,10 @@ local plugins = {
     end, -- Override to setup mason-lspconfig
   },
   {    "fatih/vim-go",
-    ft = {"go","mod","sum"},
+    event = "VeryLazy",
   },
   {    "towolf/vim-helm",
-    ft = {"yml","yaml"},
+    event = "VeryLazy",
   },
   {    "williamboman/mason.nvim",
     opts = overrides.mason

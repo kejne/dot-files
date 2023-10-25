@@ -61,9 +61,6 @@ M.general = {
 
     ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
     ["<leader>rt"] = {"<Plug>RestNvim","Do Rest Call"},
-    ["<leader>rr"] = {":lua require('refactoring').select_refactor()<CR>"},
-    ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
-    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"},
 
     ["<leader>oz"] = { ":ObsidianNew ", "New Zettel" },
     ["<leader>oj"] = { ":ObsidianToday<CR>", "Journal" },
@@ -73,9 +70,6 @@ M.general = {
     ["<leader>tt"] = { ":TDToggle<CR>", "Toggle MD task" },
   },
   x = {
-    ["<leader>rr"] = {":lua require('refactoring').select_refactor()<CR>"},
-    ["<leader>re"] = { ":Refactor extract<CR>", " Extract Function"},
-    ["<leader>rv"] = { ":Refactor extract_var ", " Extract Variable"},
     ["<leader>ol"] = { ":ObsidianLink<CR>", "To Link" },
     ["<leader>on"] = { ":ObsidianLinkNew<CR>", "New Link" },
   }
