@@ -51,15 +51,9 @@ local plugins = {
       "hrsh7th/cmp-emoji"
     },
     config = function ()
-      local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
       local cmp = require("cmp")
       cmp.setup({
         matching = {
-          -- disallow_fuzzy_matching = false,
-          -- disallow_fullfuzzy_matching = true,
-          -- disallow_partial_fuzzy_matching = true,
-          -- disallow_partial_matching = true,
-          -- disallow_prefix_unmatching = false,
         },
         snippet = {
           expand = function(args)
@@ -69,49 +63,7 @@ local plugins = {
         completion = {
           keyword_length = 1,
         },
-        window = {
-          documentation = {
-            border = border,
-            max_width = 80,
-            max_hight = 30,
-            winhighlight = "NormalFloat:NormalFloat,NonText:NonText,Special:Constant",
-          },
-          completion = {
-            border = border,
-            col_offset = 30,
-            side_padding = 0,
-            winhighlight = "NormalFloat:NormalFloat",
-          },
-        },
-        experimental = { ghost_text = true },
-        formatting = {
-          fields = { "abbr", "kind", "menu" },
-          format = function(entry, vim_item)
-            -- load lspkind icons
-            vim_item.menu = ({
-              nvim_lsp = "(LSP)",
-              emoji = "(Emoji)",
-              path = "(Path)",
-              calc = "(Calc)",
-              -- vsnip = "(Snippet)",
-              luasnip = "(Snippet)",
-              buffer = "(Buffer)",
-            })[entry.source.name]
-
-            return vim_item
-          end,
-        },
-        mapping = {
-          ["<C-p>"] = cmp.mapping.select_prev_item(),
-          ["<C-n>"] = cmp.mapping.select_next_item(),
-          ["<C-u>"] = cmp.mapping.scroll_docs(-2),
-          ["<C-d>"] = cmp.mapping.scroll_docs(2),
-          -- ["<C-l>"] = cmp.mapping.complete(),
-          ["<C-x>"] = cmp.mapping.close(),
-          ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          }),
+        mapping = cmp.mapping.preset.insert({
           ["<Tab>"] = function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -126,7 +78,12 @@ local plugins = {
               fallback()
             end
           end,
-        },
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
         sources = { -- different source for the completion
           {
             name = "nvim_lsp",
@@ -155,6 +112,14 @@ local plugins = {
           },
         },
       })
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
     end
   },
   {  "epwalsh/obsidian.nvim",
