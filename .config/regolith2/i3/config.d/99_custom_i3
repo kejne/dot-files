@@ -46,3 +46,4 @@ bindsym $mod+Ctrl+less move workspace to output left
 # Use Mouse+$mod to drag floating windows to their wanted position
 # bindsym $mod+Return exec kitty zsh
 bindsym $mod+Ctrl+t exec --no-startup-id kitty zsh
+bindsym $mod+Ctrl+n exec --no-startup-id kitty nvim ~/temp/scrapbook.md

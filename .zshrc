@@ -17,5 +17,4 @@ source $DOTFILES/team/functions/functions
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(direnv hook zsh)"
 alias vim=nvim
-
 eval "$(starship init zsh)"
