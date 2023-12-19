@@ -7,8 +7,6 @@ default partial alphanumeric_keys
 xkb_symbols "kaj_custom" {
     name[Group1]= "Kaj Custom";
     include "us(basic)"
-    key <PGUP> {	[     grave,	asciitilde	]	};
-    key <PGDN> {	[     End,	End		]	};
     key <AC10> {	[ semicolon,	colon,	U00F6,	U00D6	]	};
     key <AC11> {	[ apostrophe,	quotedbl,	U00E4,	U00C4	]	};
     key <AD11> {	[ bracketleft,	braceleft,	U00E5,	U00C5	]	};
