@@ -4,13 +4,13 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-
+  theme = "gruvbox",
   hl_override = highlights.override,
   hl_add = highlights.add,
   tabufline = {
     enabled = false
   },
-  transparency = true
+  -- transparency = true
 }
 
 M.plugins = "custom.plugins"

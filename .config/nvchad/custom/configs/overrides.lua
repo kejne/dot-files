@@ -50,7 +50,8 @@ M.mason = {
     "bash-language-server",
     "yaml-language-server",
     "jsonlint",
-    "buf-language-server"
+    "buf-language-server",
+    "delve"
   },
 }
 
