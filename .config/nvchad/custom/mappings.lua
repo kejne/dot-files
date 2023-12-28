@@ -14,17 +14,8 @@ M.disabled = {
       ["<leader>l"]  = "",
       ["<leader>e"]  = "",
       ["<leader>fb"] = "",
-      ["<Up>"]       = {"<NOP>"},
-      ["<Down>"]     = {"<NOP>"},
-      ["<Right>"]    = {"<NOP>"},
-      ["<Left>"]     = {"<NOP>"},
+      ["<leader>ma"] = "",
   },
-  i = {
-      ["<Up>"]    = "",
-      ["<Down>"]  = "",
-      ["<Right>"] = "",
-      ["<Left>"]  = "",
-  }
 }
 
 M.general = {
@@ -34,36 +25,36 @@ M.general = {
   n = {
     ["<C-s>"]            = { ":wa<CR>", "Save all", opts                                                   = { nowait = true } },
 
-    ["<leader>h"]        = { "<C-w>h", "window left" },
-    ["<leader>l"]        = { "<C-w>l", "window right" },
-    ["<leader>j"]        = { "<C-w>j", "window down" },
-    ["<leader>k"]        = { "<C-w>k", "window up" },
+    ["<leader>m"]  = { "<C-w>h", "window left" , opts                                                = { nowait = true }},
+    ["<leader>i"]  = { "<C-w>l", "window right", opts                                                = { nowait = true } },
+    ["<leader>n"]  = { "<C-w>j", "window down", opts                                                 = { nowait = true } },
+    ["<leader>e"]  = { "<C-w>k", "window up", opts                                                   = { nowait = true } },
 
-    ["<C-u>"]            = { "<C-u>zz", "Go up", opts                                                      = { nowait = true } },
-    ["<C-d>"]            = { "<C-d>zz", "Go down", opts                                                    = { nowait = true } },
+    ["<C-u>"]      = { "<C-u>zz", "Go up", opts                                                      = { nowait = true } },
+    ["<C-d>"]      = { "<C-d>zz", "Go down", opts                                                    = { nowait = true } },
 
-    ['zR']               = {":lua require('ufo').openAllFolds()<CR>"},
-    ['zM']               = {":lua require('ufo').closeAllFolds()<CR>"},
-    ["<leader>e"]        = { ":Neotree toggle<CR>", "toggle explorer" },
-    ["<leader>s"]        = {":%s/","Substitute"},
+    ['zR']         = {":lua require('ufo').openAllFolds()<CR>"},
+    ['zM']         = {":lua require('ufo').closeAllFolds()<CR>"},
+    ["<leader>o"]  = { ":Neotree toggle<CR>", "toggle explorer" },
+    ["<leader>s"]  = {":%s/","Substitute"},
 
-    ["<leader>m"]        = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon", opts          = { nowait = true } },
-    ["<S-Tab>"]          = { ":lua require(\"harpoon.ui\").nav_prev()<CR>", "Prev Harpoon", opts           = { nowait = true } },
-    ["<Tab>"]            = { ":lua require(\"harpoon.ui\").nav_next()<CR>" , "Next Harpoon", opts          = { nowait = true } },
-    ["<leader>q"]        = { ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>" , "Harpoon menu", opts = { nowait = true } },
+    ["<leader>h"]  = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon" },
+    ["<S-Tab>"]    = { ":lua require(\"harpoon.ui\").nav_prev()<CR>", "Prev Harpoon", opts           = { nowait = true } },
+    ["<Tab>"]      = { ":lua require(\"harpoon.ui\").nav_next()<CR>" , "Next Harpoon", opts          = { nowait = true } },
+    ["<leader>hm"] = { ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>" , "Harpoon menu", opts = { nowait = true } },
 
-    ["<leader>v"]        = { ":vsplit<CR>", "Split screen", opts                                           = { nowait = true } },
+    ["<leader>v"]  = { ":vsplit<CR>", "Split screen", opts                                           = { nowait = true } },
 
-    ["gr"]               = { ":GoReferrers<CR>", "Go to referrers", opts                                   = { nowait = true } },
-    ["ga"]               = { ":GoAlternate<CR>", "Open test/main", opts                                    = { nowait = true } },
-    ["<leader>tf"]       = { ":GoTestFunc<CR>", "Run Test Func", opts                                      = { nowait = true } },
-    ["<leader>t"]        = { ":GoTest<CR>", "Run all tests", opts                                          = { nowait = true } },
+    ["gr"]         = { ":GoReferrers<CR>", "Go to referrers", opts                                   = { nowait = true } },
+    ["ga"]         = { ":GoAlternate<CR>", "Open test/main", opts                                    = { nowait = true } },
+    ["<leader>tf"] = { ":GoTestFunc<CR>", "Run Test Func", opts                                      = { nowait = true } },
+    ["<leader>t"]  = { ":GoTest<CR>", "Run all tests", opts                                          = { nowait = true } },
 
     ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
     ["<leader>rt"]       = {"<Plug>RestNvim","Do Rest Call"},
 
-    ["<leader>oz"]       = { ":ObsidianNew ", "New Zettel" },
-    ["<leader>oj"]       = { ":ObsidianToday<CR>", "Journal" },
+    ["<leader>jz"]       = { ":ObsidianNew ", "New Zettel" },
+    ["<leader>jj"]       = { ":ObsidianToday<CR>", "Journal" },
     ["<leader>gl"]       = { ":ObsidianFollowLink<CR>", "Follow link" },
     ["<leader>gb"]       = { ":ObsidianBacklinks<CR>", "Backlinks" },
     ["<leader>ta"]       = { ":TDAdd<CR>", "Add MD task" },
