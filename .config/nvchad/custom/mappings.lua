@@ -15,11 +15,13 @@ M.disabled = {
       ["<leader>e"]  = "",
       ["<leader>fb"] = "",
       ["<leader>ma"] = "",
+      ["jj"] = "",
   },
 }
 
 M.general = {
   i = {
+    ["hh"] = { "<ESC>", "Quick esc", opts = { nowait = true } },
     ["<C-s>"] = { "<ESC>:wa<CR>", "Save all", opts = { nowait = true } },
   },
   n = {
