@@ -32,15 +32,33 @@ end
 local plugins = {
   {
     "huynle/ogpt.nvim",
-      event = "VeryLazy",
-      config = function()
-        require("ogpt").setup()
-      end,
-      dependencies = {
-        "MunifTanjim/nui.nvim",
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim"
-      }
+    event = "VeryLazy",
+    config = function()
+      require("ogpt").setup()
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = {"mfussenegger/nvim-dap"},
+    config = function ()
+      require("dapui").setup()
+    end
+  },
+  {
+    "leoluz/nvim-dap-go",
+    event = "VeryLazy",
+    dependencies = {
+      "mfussenegger/nvim-dap"
+    },
+    config = function ()
+     require("dap-go").setup()
+    end
   },
   {
     "folke/flash.nvim",

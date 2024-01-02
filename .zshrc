@@ -1,7 +1,7 @@
 export GOPRIVATE=github.com/cariad-odp/*
 export GOBIN=$HOME/go/bin
 export GOPATH=$HOME/go/bin
-export PATH=$PATH:$HOME/.local/go/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/go/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$GOBIN
 export ZSH="$HOME/.oh-my-zsh"
 DOTFILES="$HOME/.config/dotfiles"
 

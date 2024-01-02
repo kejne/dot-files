@@ -15,7 +15,6 @@ M.disabled = {
       ["<leader>e"]  = "",
       ["<leader>fb"] = "",
       ["<leader>ma"] = "",
-      ["jj"] = "",
   },
 }
 
@@ -31,6 +30,10 @@ M.general = {
     ["<leader>i"]  = { "<C-w>l", "window right", opts                                                = { nowait = true } },
     ["<leader>n"]  = { "<C-w>j", "window down", opts                                                 = { nowait = true } },
     ["<leader>e"]  = { "<C-w>k", "window up", opts                                                   = { nowait = true } },
+   ["<leader>h"]        = { "<C-w>h", "window left" },
+    ["<leader>l"]        = { "<C-w>l", "window right" },
+    ["<leader>j"]        = { "<C-w>j", "window down" },
+    ["<leader>k"]        = { "<C-w>k", "window up" },
 
     ["<C-u>"]      = { "<C-u>zz", "Go up", opts                                                      = { nowait = true } },
     ["<C-d>"]      = { "<C-d>zz", "Go down", opts                                                    = { nowait = true } },
@@ -40,7 +43,7 @@ M.general = {
     ["<leader>o"]  = { ":Neotree toggle<CR>", "toggle explorer" },
     ["<leader>s"]  = {":%s/","Substitute"},
 
-    ["<leader>h"]  = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon" },
+    ["<leader>ha"]  = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon" },
     ["<S-Tab>"]    = { ":lua require(\"harpoon.ui\").nav_prev()<CR>", "Prev Harpoon", opts           = { nowait = true } },
     ["<Tab>"]      = { ":lua require(\"harpoon.ui\").nav_next()<CR>" , "Next Harpoon", opts          = { nowait = true } },
     ["<leader>hm"] = { ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>" , "Harpoon menu", opts = { nowait = true } },
@@ -61,6 +64,11 @@ M.general = {
     ["<leader>gb"]       = { ":ObsidianBacklinks<CR>", "Backlinks" },
     ["<leader>ta"]       = { ":TDAdd<CR>", "Add MD task" },
     ["<leader>tt"]       = { ":TDToggle<CR>", "Toggle MD task" },
+
+    ["<leader>b"]       = { ":DapToggleBreakpoint<CR>", "Toggle Breakpoint" },
+    ["<leader>dd"]       = { ":DapContinue<CR>", "Start Debugging" },
+    ["<leader>dn"]       = { ":DapStepOver<CR>", "Debug Step Over" },
+
   },
   x = {
     ["<leader>t"]  = { ":Tabularize /", "Tabularize" },
