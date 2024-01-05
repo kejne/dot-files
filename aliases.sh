@@ -5,6 +5,7 @@ alias zshconfig="vim ~/.zshrc"
 alias ..='cd ..'
 alias ...='cd ../..'
 
+alias skn='sk -n'
 alias sd='cd ~ && cd "~/$(find * -type d | fzf)"'
 alias home-monitors='xrandr --output DP-1-3-8 --left-of eDP-1 && xrandr --output DP-3 --left-of DP-1-3-8'
 
