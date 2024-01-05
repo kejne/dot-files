@@ -31,6 +31,10 @@ end
 ---@type NvPluginSpec[]
 local plugins = {
   {
+    "lambdalisue/suda.vim",
+    event = "VeryLazy",
+  },
+  {
     "huynle/ogpt.nvim",
     event = "VeryLazy",
     config = function()
