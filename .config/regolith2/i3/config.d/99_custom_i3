@@ -41,10 +41,10 @@ exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +2%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 2%-
 bindsym $mod+p exec --no-startup-id flameshot gui
-bindsym $mod+Ctrl+greater move workspace to output right
-bindsym $mod+Ctrl+less move workspace to output left
-bindsym $mod+Ctrl+u move workspace to output up
+bindsym $mod+Mod1+greater move workspace to output right
+bindsym $mod+Mod1+less move workspace to output left
+bindsym $mod+Mod1+u move workspace to output up
 # Use Mouse+$mod to drag floating windows to their wanted position
 # bindsym $mod+Return exec kitty zsh
-bindsym $mod+Ctrl+t exec --no-startup-id kitty zsh
-bindsym $mod+Ctrl+n exec --no-startup-id kitty nvim ~/temp/scrapbook.md
+bindsym $mod+Mod1+t exec --no-startup-id kitty zsh
+bindsym $mod+Mod1+n exec --no-startup-id kitty nvim ~/tmp/scrapbook.md

@@ -15,22 +15,15 @@ M.disabled = {
       ["<leader>e"]  = "",
       ["<leader>fb"] = "",
       ["<leader>ma"] = "",
-      ["<leader>o"] = "",
   },
 }
 
 M.general = {
   i = {
-    ["hh"] = { "<ESC>", "Quick esc", opts = { nowait = true } },
     ["<C-s>"] = { "<ESC>:wa<CR>", "Save all", opts = { nowait = true } },
   },
   n = {
     ["<C-s>"]            = { ":wa<CR>", "Save all", opts                                                   = { nowait = true } },
-
-    ["<leader>m"]  = { "<C-w>h", "window left" , opts                                                = { nowait = true }},
-    ["<leader>i"]  = { "<C-w>l", "window right", opts                                                = { nowait = true } },
-    ["<leader>n"]  = { "<C-w>j", "window down", opts                                                 = { nowait = true } },
-    ["<leader>e"]  = { "<C-w>k", "window up", opts                                                   = { nowait = true } },
    ["<leader>h"]        = { "<C-w>h", "window left" },
     ["<leader>l"]        = { "<C-w>l", "window right" },
     ["<leader>j"]        = { "<C-w>j", "window down" },
@@ -41,30 +34,37 @@ M.general = {
 
     ['zR']         = {":lua require('ufo').openAllFolds()<CR>"},
     ['zM']         = {":lua require('ufo').closeAllFolds()<CR>"},
-    ["<leader>o"]  = { ":Neotree toggle<CR>", "toggle explorer" },
-    ["<leader>s"]  = {":%s/","Substitute"},
+    ["<leader>e"]  = { ":Neotree toggle<CR>", "toggle explorer" },
 
-    ["<leader>ha"]  = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon" },
+    ["<leader>sa"]    = { ":lua require(\"spectre\").toggle()<CR>", "Toggle Spectre", opts           = { nowait = true } },
+    ["<leader>sw"]    = { ":lua require(\"spectre\").open_visual({select_word=true})<CR>", "Search word", opts           = { nowait = true } },
+    ["<leader>ss"]    = { ":lua require(\"spectre\").open_file_search({select_word=true})<CR>", "Toggle Spectre", opts           = { nowait = true } },
+
+    ["x["]    = { ":lua vim.diagnostic.goto_prev()<CR>", "Prev Error", opts           = { nowait = true } },
+    ["x]"]    = { ":lua vim.diagnostic.goto_next()<CR>", "Next Error", opts           = { nowait = true } },
+
+    ["<leader>xq"]    = { ":lua require(\"trouble\").toggle(\"quickfix\")<CR>", "References", opts           = { nowait = true } },
+    ["<leader>xx"]    = { ":lua require(\"trouble\").toggle()<CR>", "References", opts           = { nowait = true } },
+    ["gr"]    = { ":lua require(\"trouble\").toggle(\"lsp_references\")<CR>", "References", opts           = { nowait = true } },
+
+    ["<leader>m"]  = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon" },
     ["<S-Tab>"]    = { ":lua require(\"harpoon.ui\").nav_prev()<CR>", "Prev Harpoon", opts           = { nowait = true } },
     ["<Tab>"]      = { ":lua require(\"harpoon.ui\").nav_next()<CR>" , "Next Harpoon", opts          = { nowait = true } },
-    ["<leader>hm"] = { ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>" , "Harpoon menu", opts = { nowait = true } },
+    ["<leader>mm"] = { ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>" , "Harpoon menu", opts = { nowait = true } },
 
     ["<leader>v"]  = { ":vsplit<CR>", "Split screen", opts                                           = { nowait = true } },
 
-    ["gr"]         = { ":GoReferrers<CR>", "Go to referrers", opts                                   = { nowait = true } },
     ["ga"]         = { ":GoAlternate<CR>", "Open test/main", opts                                    = { nowait = true } },
     ["<leader>tf"] = { ":GoTestFunc<CR>", "Run Test Func", opts                                      = { nowait = true } },
-    ["<leader>t"]  = { ":GoTest<CR>", "Run all tests", opts                                          = { nowait = true } },
+    ["<leader>tt"]  = { ":GoTest<CR>", "Run all tests", opts                                          = { nowait = true } },
 
     ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
     ["<leader>rt"]       = {"<Plug>RestNvim","Do Rest Call"},
 
-    ["<leader>jz"]       = { ":ObsidianNew ", "New Zettel" },
-    ["<leader>jj"]       = { ":ObsidianToday<CR>", "Journal" },
+    ["<leader>oz"]       = { ":ObsidianNew ", "New Zettel" },
+    ["<leader>oj"]       = { ":ObsidianToday<CR>", "Journal" },
     ["<leader>gl"]       = { ":ObsidianFollowLink<CR>", "Follow link" },
     ["<leader>gb"]       = { ":ObsidianBacklinks<CR>", "Backlinks" },
-    ["<leader>ta"]       = { ":TDAdd<CR>", "Add MD task" },
-    ["<leader>tt"]       = { ":TDToggle<CR>", "Toggle MD task" },
 
     ["<leader>b"]       = { ":DapToggleBreakpoint<CR>", "Toggle Breakpoint" },
     ["<leader>dd"]       = { ":DapContinue<CR>", "Start Debugging" },
@@ -72,6 +72,7 @@ M.general = {
 
   },
   x = {
+    ["<leader>sw"]    = { ":lua require(\"spectre\").open_visual()<CR>", "Search word", opts           = { nowait = true } },
     ["<leader>t"]  = { ":Tabularize /", "Tabularize" },
     ["<leader>ol"] = { ":ObsidianLink<CR>", "To Link" },
     ["<leader>on"] = { ":ObsidianLinkNew<CR>", "New Link" },

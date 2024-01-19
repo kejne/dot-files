@@ -31,20 +31,66 @@ end
 ---@type NvPluginSpec[]
 local plugins = {
   {
-    "lambdalisue/suda.vim",
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {}
+  },
+  {
+   "nvim-pack/nvim-spectre",
+    dependencies = { "nvim-lua/plenary.nvim"  }
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    config = function ()
+      require("noice").setup({
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+          hover = {
+            enabled = false,
+          },
+          signature = {
+            enabled = false,
+          },
+        },
+        presets = {
+          -- bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
+      })
+    end,
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
     event = "VeryLazy",
   },
   {
-    "huynle/ogpt.nvim",
+    "lambdalisue/suda.vim",
     event = "VeryLazy",
-    config = function()
-      require("ogpt").setup()
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -68,13 +114,6 @@ local plugins = {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
-  },
-  { "unamatasanatarai/nvim-md-todo-toggle",
-    event = "VeryLazy",
-	  ft = "md",
-    config = function ()
-     require("nvim-md-todo-toggle").setup()
-    end
   },
   {"hrsh7th/cmp-emoji",
     lazy = true
@@ -156,23 +195,48 @@ local plugins = {
 
     end
   },
-  {  "epwalsh/obsidian.nvim",
-    keys = {
-      { "<leader>o", ":ObsidianQuickSwitch<CR>", desc = "Obsidian quickswitch" },
-      { "<leader>n", ":ObsidianSearch<CR>", desc = "Obsidian Search" },
-    },
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    event = "VeryLazy",
+    ft = "markdown",
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim", -- optional
-      -- "hrsh7th/nvim-cmp",
-      -- see below for full list of optional dependencies 👇
+      "nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+      "hrsh7th/nvim-cmp",
     },
     opts = {
-      dir = "~/second-brain",
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/second-brain/personal",
+        },
+        {
+          name = "work",
+          path = "~/second-brain/trident-docs",
+        },
+      },
+      mappings = {
+        -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+        ["gf"] = {
+          action = function()
+            return require("obsidian").util.gf_passthrough()
+          end,
+          opts = { noremap = false, expr = true, buffer = true },
+        },
+        -- Toggle check-boxes.
+        ["<leader>ch"] = {
+          action = function()
+            return require("obsidian").util.toggle_checkbox()
+          end,
+          opts = { buffer = true },
+        },
+      },
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
-        folder = "private/dailies",
+        folder = "dailies",
         -- Optional, if you want to change the date format for the ID of daily notes.
         date_format = "%Y-%m-%d",
         -- Optional, if you want to change the date format of the default alias of daily notes.
@@ -181,18 +245,18 @@ local plugins = {
         template = nil,
       },
 
-      notes_subdir = "private/zettelkasten",
-      note_id_func = function(title)
-        if title ~= nil then
-          title = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-        end
-        return title
-      end,
-      follow_url_func = function(url)
-        -- Open the URL in the default web browser.
-        -- vim.fn.jobstart({"open", url})  -- Mac OS
-        vim.fn.jobstart({"browse", url})  -- linux
-      end,
+      notes_subdir = "zettelkasten",
+      -- note_id_func = function(title)
+      --   if title ~= nil then
+      --     title = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+      --   end
+      --   return title
+      -- end,
+      -- follow_url_func = function(url)
+      --   -- Open the URL in the default web browser.
+      --   -- vim.fn.jobstart({"open", url})  -- Mac OS
+      --   vim.fn.jobstart({"browse", url})  -- linux
+      -- end,
       -- Optional, completion.
       completion = {
         -- If using nvim-cmp, otherwise set to false
@@ -208,17 +272,17 @@ local plugins = {
         -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
         prepend_note_id = true
       },
-      overwrite_mappings = true
+      -- see below for full list of options 👇
     },
   },
   {  'godlygeek/tabular',
     lazy = false
   },
-  {  'plasticboy/vim-markdown',
-    branch = 'master',
-    require = {'godlygeek/tabular'},
-    ft = "md"
-  },
+  -- {  'plasticboy/vim-markdown',
+  --   branch = 'master',
+  --   require = {'godlygeek/tabular'},
+  --   ft = "md"
+  -- },
   {    'kevinhwang91/nvim-ufo',
     event = "VeryLazy",
     requires = 'kevinhwang91/promise-async',
@@ -366,6 +430,7 @@ local plugins = {
               ["ai"] = "@conditional.outer",
               ["il"] = "@loop.inner",
               ["al"] = "@loop.outer",
+              ["ac"] = { query = "@class.outer", desc = "Select outer part of a class region" },
               ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
               ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" }, },
             selection_modes = {
