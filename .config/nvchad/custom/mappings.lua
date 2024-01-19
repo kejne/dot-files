@@ -60,6 +60,8 @@ M.general = {
     ["<leader>tt"]       = { ":GoTest<CR>", "Run all tests", opts                                           = { nowait                            = true } },
 
     ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
+    ["<leader>bb"] = { ":%bd|e#|bd#<CR>", "Close all buffers" },
+
     ["<leader>rt"]       = {"<Plug>RestNvim","Do Rest Call"},
 
     ["<leader>owp"] = { ":ObsidianWorkspace personal<CR>", "ObsidianQuickSwitch" },
