@@ -25,7 +25,7 @@ local foldHandler = function(virtText, lnum, endLnum, width, truncate)
         curWidth = curWidth + chunkWidth
     end
     table.insert(newVirtText, {suffix, 'MoreMsg'})
-    return newVirtText
+     return newVirtText
 end
 
 ---@type NvPluginSpec[]
@@ -33,16 +33,19 @@ local plugins = {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {}
+    opts = {},
+    event = "VeryLazy",
   },
   {
    "nvim-pack/nvim-spectre",
-    dependencies = { "nvim-lua/plenary.nvim"  }
+    dependencies = { "nvim-lua/plenary.nvim"  },
+    event = "VeryLazy",
   },
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
+    event = "VeryLazy",
   },
   {
     "folke/noice.nvim",
@@ -115,6 +118,14 @@ local plugins = {
     event = "VeryLazy",
     opts = {},
   },
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    config = function ()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end
+  },
+  { "rafamadriz/friendly-snippets" },
   {"hrsh7th/cmp-emoji",
     lazy = true
   },
@@ -210,12 +221,12 @@ local plugins = {
     opts = {
       workspaces = {
         {
-          name = "personal",
-          path = "~/second-brain/personal",
-        },
-        {
           name = "work",
           path = "~/second-brain/trident-docs",
+        },
+        {
+          name = "personal",
+          path = "~/second-brain/personal",
         },
       },
       mappings = {
@@ -246,18 +257,6 @@ local plugins = {
       },
 
       notes_subdir = "zettelkasten",
-      -- note_id_func = function(title)
-      --   if title ~= nil then
-      --     title = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-      --   end
-      --   return title
-      -- end,
-      -- follow_url_func = function(url)
-      --   -- Open the URL in the default web browser.
-      --   -- vim.fn.jobstart({"open", url})  -- Mac OS
-      --   vim.fn.jobstart({"browse", url})  -- linux
-      -- end,
-      -- Optional, completion.
       completion = {
         -- If using nvim-cmp, otherwise set to false
         nvim_cmp = true,
