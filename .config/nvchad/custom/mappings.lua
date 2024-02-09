@@ -29,6 +29,8 @@ M.general = {
     ["<leader>j"]        = { "<C-w>j", "window down" },
     ["<leader>k"]        = { "<C-w>k", "window up" },
 
+    ["<PageUp>"]         = { "<C-u>zz", "Go up", opts                                                       = { nowait                            = true } },
+    ["<PageDown>"]       = { "<C-d>zz", "Go down", opts                                                       = { nowait                            = true } },
     ["<C-u>"]            = { "<C-u>zz", "Go up", opts                                                       = { nowait                            = true } },
     ["<C-d>"]            = { "<C-d>zz", "Go down", opts                                                     = { nowait                            = true } },
 
@@ -57,6 +59,7 @@ M.general = {
     ["ga"]               = { ":GoAlternate<CR>", "Open test/main", opts                                     = { nowait                            = true } },
 
     ["<leader>tf"]       = { ":GoTestFunc<CR>", "Run Test Func", opts                                       = { nowait                            = true } },
+    ["<leader>tc"]       = { ":GoCoverageToggle<CR>", "Toggle Coverage", opts                                       = { nowait                            = true } },
     ["<leader>tt"]       = { ":GoTest<CR>", "Run all tests", opts                                           = { nowait                            = true } },
 
     ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
@@ -64,10 +67,10 @@ M.general = {
 
     ["<leader>rt"]       = {"<Plug>RestNvim","Do Rest Call"},
 
-    ["<leader>owp"] = { ":ObsidianWorkspace personal<CR>", "ObsidianQuickSwitch" },
-    ["<leader>oww"] = { ":ObsidianWorkspace work<CR>", "ObsidianQuickSwitch" },
+    ["<leader>owp"] = { ":ObsidianWorkspace personal<CR>", "Obsidian Personal Workspace" },
+    ["<leader>oww"] = { ":ObsidianWorkspace work<CR>", "Obsidian Work Workspace" },
     ["<leader>oq"]  = { ":ObsidianQuickSwitch<CR>", "ObsidianQuickSwitch" },
-    ["<leader>os"]  = { ":ObsidianSearch ", "Obsidian Search" },
+    ["<leader>os"]  = { ":ObsidianSearch<CR>", "Obsidian Search" },
     ["<leader>oz"]  = { ":ObsidianNew ", "New Zettel" },
     ["<leader>oj"]  = { ":ObsidianToday<CR>", "Journal" },
     ["<leader>ob"]  = { ":ObsidianBacklinks<CR>", "Backlinks" },

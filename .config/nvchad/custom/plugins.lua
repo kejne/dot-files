@@ -104,7 +104,7 @@ local plugins = {
         },
         presets = {
           -- bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
+          command_palette = true, -- position the cmdline and popupmenu togetherpl
           long_message_to_split = true, -- long messages will be sent to a split
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = false, -- add a border to hover docs and signature help
@@ -258,13 +258,13 @@ local plugins = {
         },
       })
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = 'buffer' }
-        }
-      })
-
+      -- cmp.setup.cmdline({ '/', '?' }, {
+      --   mapping = cmp.mapping.preset.cmdline(),
+      --   sources = {
+      --     { name = 'buffer' }
+      --   }
+      -- })
+      --
     end
   },
   {

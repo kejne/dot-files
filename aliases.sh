@@ -5,6 +5,7 @@ alias zshconfig="vim ~/.zshrc"
 alias ..='cd ..'
 alias ...='cd ../..'
 
+alias v='nvim'
 alias skn='sk -n'
 alias skN='sk -N'
 alias sd='cd ~ && cd "~/$(find * -type d | fzf)"'
