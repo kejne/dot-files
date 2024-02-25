@@ -67,10 +67,16 @@ M.general = {
 
     ["<leader>rt"]       = {"<Plug>RestNvim","Do Rest Call"},
 
+    ["<leader>n"]       = {":Noice dismiss<CR>","Dismiss messages"},
+
+    ["<leader>oi"] = { ":ObsidianPasteImg<CR>", "Obsidian Paste Image" },
+    ["<leader>owt"] = { ":ObsidianWorkspace team<CR>", "Obsidian Team Workspace" },
     ["<leader>owp"] = { ":ObsidianWorkspace personal<CR>", "Obsidian Personal Workspace" },
-    ["<leader>oww"] = { ":ObsidianWorkspace work<CR>", "Obsidian Work Workspace" },
+    ["<leader>owd"] = { ":ObsidianWorkspace default<CR>", "Obsidian Default Workspace" },
     ["<leader>oq"]  = { ":ObsidianQuickSwitch<CR>", "ObsidianQuickSwitch" },
     ["<leader>os"]  = { ":ObsidianSearch<CR>", "Obsidian Search" },
+    ["<leader>opz"]  = { ":ObsidianWorkspace personal<CR>:ObsidianNew ", "New Personal Zettel" },
+    ["<leader>otz"]  = { ":ObsidianWorkspace team<CR>:ObsidianNew ", "New Team Zettel" },
     ["<leader>oz"]  = { ":ObsidianNew ", "New Zettel" },
     ["<leader>oj"]  = { ":ObsidianToday<CR>", "Journal" },
     ["<leader>ob"]  = { ":ObsidianBacklinks<CR>", "Backlinks" },
@@ -91,7 +97,5 @@ M.general = {
     ["<leader>de"] = { ":lua require(\"dapui\").eval()<CR>", "Debug evaluate" },
   }
 }
-
--- more keybinds!
 
 return M

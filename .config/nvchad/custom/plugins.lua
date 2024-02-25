@@ -282,12 +282,16 @@ local plugins = {
     opts = {
       workspaces = {
         {
-          name = "work",
-          path = "~/second-brain/trident-docs",
+          name = "team",
+          path = "~/second-brain/team",
         },
         {
           name = "personal",
           path = "~/second-brain/personal",
+        },
+        {
+          name = "default",
+          path = "~/second-brain/default",
         },
       },
       mappings = {
@@ -316,33 +320,40 @@ local plugins = {
         -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
         template = nil,
       },
-
+      note_id_func = function(title)
+        if title == nil then
+          local suffix = string.char(math.random(65, 90))
+          return title:tostring(os.time()) .. "-" .. suffix
+        end
+        return title
+      end,
+      templates = {
+        subdir = "templates",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+        -- A map for custom variables, the key should be the variable and the value a function
+        substitutions = {},
+      },
       notes_subdir = "zettelkasten",
       completion = {
-        -- If using nvim-cmp, otherwise set to false
         nvim_cmp = true,
-        -- Trigger completion at 2 chars
         min_chars = 2,
-        -- Where to put new notes created from completion. Valid options are
-        --  * "current_dir" - put new notes in same directory as the current buffer.
-        --  * "notes_subdir" - put new notes in the default notes subdirectory.
-        new_notes_location = "notes_subdir",
-
-        -- Whether to add the output of the node_id_func to new notes in autocompletion.
-        -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
-        prepend_note_id = true
       },
-      -- see below for full list of options 👇
+      attachments = {
+        img_folder = "attachments",
+      },
     },
   },
-  {  'godlygeek/tabular',
-    lazy = false
+  {
+    'stevearc/oil.nvim',
+    event = "VeryLazy",
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  -- {  'plasticboy/vim-markdown',
-  --   branch = 'master',
-  --   require = {'godlygeek/tabular'},
-  --   ft = "md"
-  -- },
+  {  'godlygeek/tabular',
+    event = "VeryLazy",
+  },
   {    'kevinhwang91/nvim-ufo',
     event = "VeryLazy",
     requires = 'kevinhwang91/promise-async',
@@ -362,7 +373,7 @@ local plugins = {
     lazy = true,
   },
   { "ThePrimeagen/harpoon",
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       require("harpoon").setup({
         tabline = true,

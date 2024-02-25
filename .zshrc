@@ -14,6 +14,11 @@ source $DOTFILES/personal/git-functions.sh
 source $DOTFILES/personal/general-functions.sh
 source $DOTFILES/team/functions/functions
 
+lfcd() {
+    cd "$(command lf -print-last-dir "$@")"
+}
+alias lf='lfcd'
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(direnv hook zsh)"
 alias vim=nvim

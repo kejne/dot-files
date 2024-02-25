@@ -25,7 +25,7 @@ font pango:JetBrainsMono Nerd Font 10
 exec --no-startup-id dex-autostart --autostart --environment i3
 exec --no-startup-id flameshot
 exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
-exec --no-startup-id feh --bg-scale --zoom fill /home/kejne/Pictures/sorceress.jpg
+exec --no-startup-id feh --bg-scale --zoom fill /home/kejne/Pictures/hearts.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -51,6 +51,9 @@ bindsym $mod+Ctrl+l move workspace to output right
 bindsym $mod+Ctrl+h move workspace to output left
 bindsym $mod+Ctrl+k move workspace to output up
 bindsym $mod+Ctrl+j move workspace to output down
+
+bindsym $mod+Mod1+greater workspace next
+bindsym $mod+Mod1+less workspace prev
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -64,6 +67,7 @@ bindsym $mod+m exec --no-startup-id ~/.local/bin/emoji
 # gaps inner 5px
 # start a terminal
 bindsym $mod+Return exec kitty zsh
+bindsym $mod+n exec kitty nvim ~/temp/scrapbook.md
 
 # bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
