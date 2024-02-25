@@ -14,6 +14,7 @@ source $DOTFILES/personal/git-functions.sh
 source $DOTFILES/personal/general-functions.sh
 source $DOTFILES/team/functions/functions
 
+export EDITOR="nvim"
 lfcd() {
     cd "$(command lf -print-last-dir "$@")"
 }
