@@ -45,8 +45,8 @@ M.general = {
 
     ["z["]               = { ":lua vim.diagnostic.goto_prev()<CR>", "Prev Error", opts                      = { nowait                            = true } },
     ["z]"]               = { ":lua vim.diagnostic.goto_next()<CR>", "Next Error", opts                      = { nowait                            = true } },
-    ["<leader>xq"]       = { ":lua require(\"trouble\").toggle(\"quickfix\")<CR>", "References", opts       = { nowait                            = true } },
-    ["<leader>xx"]       = { ":lua require(\"trouble\").toggle()<CR>", "References", opts                   = { nowait                            = true } },
+    ["<leader>xq"]       = { ":lua require(\"trouble\").toggle(\"quickfix\")<CR>", "Errors quickfix", opts       = { nowait                            = true } },
+    ["<leader>xx"]       = { ":lua require(\"trouble\").toggle()<CR>", "Errors", opts                   = { nowait                            = true } },
 
     ["<leader>m"]        = { ":lua require(\"harpoon.mark\").add_file()<CR>", "Add Harpoon" },
     ["<S-Tab>"]          = { ":lua require(\"harpoon.ui\").nav_prev()<CR>", "Prev Harpoon", opts            = { nowait                            = true } },
@@ -63,7 +63,8 @@ M.general = {
     ["<leader>tt"]       = { ":GoTest<CR>", "Run all tests", opts                                           = { nowait                            = true } },
 
     ["<leader><leader>"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
-    ["<leader>bb"] = { ":%bd|e#|bd#<CR>", "Close all buffers" },
+    ["<leader>ba"] = { ":%bd|e#|bd#<CR>", "Close all buffers" },
+    ["<leader>bb"] = { ":bd<CR>", "Close buffer" },
 
     ["<leader>rt"]       = {"<Plug>RestNvim","Do Rest Call"},
 
