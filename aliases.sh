@@ -14,7 +14,7 @@ alias home-monitors='xrandr --output DP-1-3-8 --left-of eDP-1 && xrandr --output
 # Open Neovim at common repos
 alias pnc='cd ~/git/trident/pnc-service && nvim'
 alias scc='cd ~/git/trident/scc-service && nvim'
-alias tdocs='cd ~/second-brain/trident-docs && nvim'
+alias tdocs='cd ~/second-brain/team && nvim'
 alias pdocs='cd ~/second-brain/personal && nvim'
 alias docs='cd ~/second-brain && nvim'
 alias pdots='cd ~/.config/dotfiles/personal && nvim'
