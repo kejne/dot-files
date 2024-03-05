@@ -26,9 +26,10 @@ map O $mimeopen --ask $f
 
 map gD cd ~/Downloads 
 map gs cd ~/second-brain 
-map gc cd ~/second-brain 
+map gc cd ~/.config
 map gd cd ~/git 
-map Z :push %z<space>
+map gn cd ~/.config/nvim 
+map V $nvim $$f
 
 cmd extract ${{
     set -f
