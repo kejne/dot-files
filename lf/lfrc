@@ -7,6 +7,7 @@ set scrolloff 10
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
 
+%source ~/.zshrc
 %mkdir -p ~/.trash
 %EDITOR=nvim
 # show the result of execution of previous commands
@@ -29,7 +30,10 @@ map gs cd ~/second-brain
 map gc cd ~/.config
 map gd cd ~/git 
 map gn cd ~/.config/nvim 
-map V $nvim $$f
+map gts cd ~/git/trident/scc-service
+map gtp cd ~/git/trident/pnc-service
+
+map V $nvim
 
 cmd extract ${{
     set -f

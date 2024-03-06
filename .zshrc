@@ -14,11 +14,16 @@ source $DOTFILES/personal/git-functions.sh
 source $DOTFILES/personal/general-functions.sh
 source $DOTFILES/team/functions/functions
 
+# LF config
 export EDITOR="nvim"
 lfcd() {
     cd "$(command lf -print-last-dir "$@")"
 }
 alias lf='lfcd'
+
+# Map wacom tablet to single monitor
+xsetwacom --set "12" MapToOutput DP-1-3-8
+xsetwacom --set "11" MapToOutput DP-1-3-8
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(direnv hook zsh)"
