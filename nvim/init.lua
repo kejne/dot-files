@@ -101,6 +101,34 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+local foldHandler = function(virtText, lnum, endLnum, width, truncate)
+  local newVirtText = {}
+  local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+  local sufWidth = vim.fn.strdisplaywidth(suffix)
+  local targetWidth = width - sufWidth
+  local curWidth = 0
+  for _, chunk in ipairs(virtText) do
+    local chunkText = chunk[1]
+    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    if targetWidth > curWidth + chunkWidth then
+      table.insert(newVirtText, chunk)
+    else
+      chunkText = truncate(chunkText, targetWidth - curWidth)
+      local hlGroup = chunk[2]
+      table.insert(newVirtText, { chunkText, hlGroup })
+      chunkWidth = vim.fn.strdisplaywidth(chunkText)
+      -- str width returned from truncate() may less than 2nd argument, need padding
+      if curWidth + chunkWidth < targetWidth then
+        suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+      end
+      break
+    end
+    curWidth = curWidth + chunkWidth
+  end
+  table.insert(newVirtText, { suffix, 'MoreMsg' })
+  return newVirtText
+end
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -117,6 +145,36 @@ require('lazy').setup {
   'towolf/vim-helm',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
+  {
+    'huynle/ogpt.nvim',
+    event = 'VeryLazy',
+    opts = {
+      default_provider = 'ollama',
+    },
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+  },
+  {
+    'jackMort/ChatGPT.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('chatgpt').setup {
+        api_key_cmd = 'pass show openai',
+        openai_params = {
+          model = 'gpt-4',
+        },
+      }
+    end,
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'folke/trouble.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+  },
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -198,7 +256,12 @@ require('lazy').setup {
   {
     'folke/twilight.nvim',
     event = 'VeryLazy',
-    opts = {},
+    opts = {
+      dimming = {
+        alpha = 0.4, -- amount of dimming
+      },
+      context = 15, -- amount of lines we will try to show around the current line
+    },
   },
   {
     'folke/trouble.nvim',
@@ -421,6 +484,7 @@ require('lazy').setup {
 
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for neovim
       'williamboman/mason.nvim',
@@ -594,6 +658,7 @@ require('lazy').setup {
 
   { -- Autoformat
     'stevearc/conform.nvim',
+    event = 'VeryLazy',
     opts = {
       notify_on_error = false,
       format_on_save = {
@@ -613,7 +678,7 @@ require('lazy').setup {
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
-    lazy = false,
+    event = 'VeryLazy',
     branch = 'v3.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -712,7 +777,7 @@ require('lazy').setup {
     requires = 'kevinhwang91/promise-async',
     config = function()
       require('ufo').setup {
-        -- fold_virt_text_handler = foldHandler,
+        fold_virt_text_handler = foldHandler,
         provider_selector = function(bufnr, filetype, buftype)
           return { 'treesitter', 'indent' }
         end,
