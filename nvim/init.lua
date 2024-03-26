@@ -101,6 +101,17 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+--[[ 
+    Function to handle folding of text with virtual text.
+    Parameters:
+      - virtText: table containing the text to be folded
+      - lnum: starting line number
+      - endLnum: ending line number
+      - width: width of the virtual text
+      - truncate: function to truncate text if it exceeds the width
+    Returns:
+      - newVirtText: table containing the modified virtual text
+  --]]
 local foldHandler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local suffix = (' 󰁂 %d '):format(endLnum - lnum)
@@ -129,20 +140,9 @@ local foldHandler = function(virtText, lnum, endLnum, width, truncate)
   return newVirtText
 end
 
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins, you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
 require('lazy').setup {
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'towolf/vim-helm',
+  'xiyaowong/transparent.nvim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
   {
@@ -150,6 +150,10 @@ require('lazy').setup {
     event = 'VeryLazy',
     opts = {
       default_provider = 'ollama',
+      actions_paths = {
+        '/home/ab000069/.config/ogpt',
+        -- debug.getinfo(1, 'S').source:sub(2):match '(.*/)' .. 'actions.json',
+      },
     },
     dependencies = {
       'MunifTanjim/nui.nvim',
@@ -164,7 +168,7 @@ require('lazy').setup {
       require('chatgpt').setup {
         api_key_cmd = 'pass show openai',
         openai_params = {
-          model = 'gpt-4',
+          model = 'gpt-3.5-turbo',
         },
       }
     end,
@@ -220,7 +224,7 @@ require('lazy').setup {
   {
     'rcarriga/nvim-dap-ui',
     event = 'VeryLazy',
-    dependencies = { 'mfussenegger/nvim-dap' },
+    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
     config = function()
       require('dapui').setup()
     end,
@@ -634,7 +638,7 @@ require('lazy').setup {
         'golangci-lint',
         'tflint',
         'bash-language-server',
-        'yaml-language-server',
+        -- 'yaml-language-server',
         'jsonlint',
         'buf-language-server',
         'delve',
@@ -800,7 +804,7 @@ require('lazy').setup {
   {
     'NeogitOrg/neogit',
     keys = {
-      { '<leader>gg', ':Neogit kind=vsplit<CR>', desc = 'Neogit split' },
+      { '<leader>gg', ':Neogit<CR>', desc = 'Neogit' },
     },
     dependencies = {
       'nvim-lua/plenary.nvim', -- required
@@ -970,7 +974,7 @@ require('lazy').setup {
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'go', 'proto', 'yaml', 'terraform', 'json' },
+        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'go', 'proto', 'yaml', 'terraform', 'json', 'java' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },

@@ -5,15 +5,15 @@ alias zshconfig="vim ~/.zshrc"
 alias ..='cd ..'
 alias ...='cd ../..'
 
+alias ks='k9s'
 alias v='nvim'
 alias skn='sk -n'
 alias skN='sk -N'
-alias sd='cd ~ && cd "~/$(find * -type d | fzf)"'
+alias sd='cd ~/git && cd "~/git/$(find * -type d | fzf)"'
 alias home-monitors='xrandr --output DP-1-3-8 --left-of eDP-1 && xrandr --output DP-3 --left-of DP-1-3-8'
 
 # Open Neovim at common repos
 alias pnc='cd ~/git/trident/pnc-service && nvim'
-alias scc='cd ~/git/trident/scc-service && nvim'
 alias tdocs='cd ~/second-brain/team && nvim'
 alias pdocs='cd ~/second-brain/personal && nvim'
 alias docs='cd ~/second-brain && nvim'

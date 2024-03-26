@@ -2,7 +2,7 @@ set shell zsh
 set shellopts '-eu'
 set ifs "\n"
 set icons true
-# leave some space at the top and the bottom of the screen
+# leave some pace at the top and the bottom of the screen
 set scrolloff 10
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
@@ -30,8 +30,7 @@ map gs cd ~/second-brain
 map gc cd ~/.config
 map gd cd ~/git 
 map gn cd ~/.config/nvim 
-map gts cd ~/git/trident/scc-service
-map gtp cd ~/git/trident/pnc-service
+map gp cd ~/git/trident/pnc-service
 
 map V $nvim
 
