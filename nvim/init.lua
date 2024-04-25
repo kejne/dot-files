@@ -240,11 +240,6 @@ require('lazy').setup {
     end,
   },
   {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {},
-  },
-  {
     'folke/zen-mode.nvim',
     event = 'VeryLazy',
     opts = {
@@ -273,46 +268,46 @@ require('lazy').setup {
     opts = {},
     event = 'VeryLazy',
   },
-  {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('noice').setup {
-        lsp = {
-          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-          override = {
-            ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-            ['vim.lsp.util.stylize_markdown'] = true,
-            ['cmp.entry.get_documentation'] = true,
-          },
-          hover = {
-            enabled = false,
-          },
-          signature = {
-            enabled = false,
-          },
-        },
-        presets = {
-          -- bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu togetherpl
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
-        },
-      }
-    end,
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      'MunifTanjim/nui.nvim',
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      'rcarriga/nvim-notify',
-    },
-  },
+  -- {
+  --   'folke/noice.nvim',
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     require('noice').setup {
+  --       lsp = {
+  --         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+  --         override = {
+  --           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+  --           ['vim.lsp.util.stylize_markdown'] = true,
+  --           ['cmp.entry.get_documentation'] = true,
+  --         },
+  --         hover = {
+  --           enabled = false,
+  --         },
+  --         signature = {
+  --           enabled = false,
+  --         },
+  --       },
+  --       presets = {
+  --         -- bottom_search = true, -- use a classic bottom cmdline for search
+  --         command_palette = true, -- position the cmdline and popupmenu togetherpl
+  --         long_message_to_split = true, -- long messages will be sent to a split
+  --         inc_rename = false, -- enables an input dialog for inc-rename.nvim
+  --         lsp_doc_border = false, -- add a border to hover docs and signature help
+  --       },
+  --     }
+  --   end,
+  --   opts = {
+  --     -- add any options here
+  --   },
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     'MunifTanjim/nui.nvim',
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     'rcarriga/nvim-notify',
+  --   },
+  -- },
   {
     'nvim-treesitter/nvim-treesitter-context',
     event = 'VeryLazy',
@@ -775,19 +770,19 @@ require('lazy').setup {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   { 'godlygeek/tabular', event = 'VeryLazy' },
-  {
-    'kevinhwang91/nvim-ufo',
-    event = 'VeryLazy',
-    requires = 'kevinhwang91/promise-async',
-    config = function()
-      require('ufo').setup {
-        fold_virt_text_handler = foldHandler,
-        provider_selector = function(bufnr, filetype, buftype)
-          return { 'treesitter', 'indent' }
-        end,
-      }
-    end,
-  },
+  -- {
+  --   'kevinhwang91/nvim-ufo',
+  --   event = 'VeryLazy',
+  --   requires = 'kevinhwang91/promise-async',
+  --   config = function()
+  --     require('ufo').setup {
+  --       fold_virt_text_handler = foldHandler,
+  --       provider_selector = function(bufnr, filetype, buftype)
+  --         return { 'treesitter', 'indent' }
+  --       end,
+  --     }
+  --   end,
+  -- },
   { 'kevinhwang91/promise-async', lazy = true },
   { 'nvim-lua/plenary.nvim', lazy = true },
   {

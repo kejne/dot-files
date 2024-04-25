@@ -73,7 +73,7 @@ vim.keymap.set('n', '<leader>oj', ':ObsidianToday<CR>', { desc = 'Journal', nore
 vim.keymap.set('n', '<leader>ob', ':ObsidianBacklinks<CR>', { desc = 'Backlinks', noremap = true, silent = true })
 -- Debugging
 vim.keymap.set('n', '<leader>db', ':DapToggleBreakpoint<CR>', { desc = 'Toggle Breakpoint', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>ds', ':DapContinue<CR>', { desc = 'Start Debugging', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>dc', ':DapContinue<CR>', { desc = 'Start Debugging', noremap = true, silent = true })
 vim.keymap.set('n', '<C-l>', ':DapStepInto<CR>', { desc = 'Debug Step Into', noremap = true, silent = true })
 vim.keymap.set('n', '<C-j>', ':DapStepOver<CR>', { desc = 'Debug Step Over', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>dt', ':DapTerminate<CR>', { desc = 'Debug Terminate', noremap = true, silent = true })
