@@ -78,6 +78,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.opt.hlsearch = true
 
 require 'mappings'
+require 'plugins'
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
