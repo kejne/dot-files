@@ -78,6 +78,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.opt.hlsearch = true
 
 require 'mappings'
+require 'plugins'
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -101,6 +102,17 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+--[[ 
+    Function to handle folding of text with virtual text.
+    Parameters:
+      - virtText: table containing the text to be folded
+      - lnum: starting line number
+      - endLnum: ending line number
+      - width: width of the virtual text
+      - truncate: function to truncate text if it exceeds the width
+    Returns:
+      - newVirtText: table containing the modified virtual text
+  --]]
 local foldHandler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local suffix = (' 󰁂 %d '):format(endLnum - lnum)
@@ -129,20 +141,9 @@ local foldHandler = function(virtText, lnum, endLnum, width, truncate)
   return newVirtText
 end
 
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins, you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
 require('lazy').setup {
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'towolf/vim-helm',
+  'xiyaowong/transparent.nvim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
   {
@@ -150,6 +151,10 @@ require('lazy').setup {
     event = 'VeryLazy',
     opts = {
       default_provider = 'ollama',
+      actions_paths = {
+        '/home/ab000069/.config/ogpt',
+        -- debug.getinfo(1, 'S').source:sub(2):match '(.*/)' .. 'actions.json',
+      },
     },
     dependencies = {
       'MunifTanjim/nui.nvim',
@@ -164,7 +169,7 @@ require('lazy').setup {
       require('chatgpt').setup {
         api_key_cmd = 'pass show openai',
         openai_params = {
-          model = 'gpt-4',
+          model = 'gpt-3.5-turbo',
         },
       }
     end,
@@ -220,7 +225,7 @@ require('lazy').setup {
   {
     'rcarriga/nvim-dap-ui',
     event = 'VeryLazy',
-    dependencies = { 'mfussenegger/nvim-dap' },
+    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
     config = function()
       require('dapui').setup()
     end,
@@ -234,11 +239,6 @@ require('lazy').setup {
     config = function()
       require('dap-go').setup()
     end,
-  },
-  {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {},
   },
   {
     'folke/zen-mode.nvim',
@@ -269,46 +269,46 @@ require('lazy').setup {
     opts = {},
     event = 'VeryLazy',
   },
-  {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('noice').setup {
-        lsp = {
-          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-          override = {
-            ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-            ['vim.lsp.util.stylize_markdown'] = true,
-            ['cmp.entry.get_documentation'] = true,
-          },
-          hover = {
-            enabled = false,
-          },
-          signature = {
-            enabled = false,
-          },
-        },
-        presets = {
-          -- bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu togetherpl
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
-        },
-      }
-    end,
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      'MunifTanjim/nui.nvim',
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      'rcarriga/nvim-notify',
-    },
-  },
+  -- {
+  --   'folke/noice.nvim',
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     require('noice').setup {
+  --       lsp = {
+  --         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+  --         override = {
+  --           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+  --           ['vim.lsp.util.stylize_markdown'] = true,
+  --           ['cmp.entry.get_documentation'] = true,
+  --         },
+  --         hover = {
+  --           enabled = false,
+  --         },
+  --         signature = {
+  --           enabled = false,
+  --         },
+  --       },
+  --       presets = {
+  --         -- bottom_search = true, -- use a classic bottom cmdline for search
+  --         command_palette = true, -- position the cmdline and popupmenu togetherpl
+  --         long_message_to_split = true, -- long messages will be sent to a split
+  --         inc_rename = false, -- enables an input dialog for inc-rename.nvim
+  --         lsp_doc_border = false, -- add a border to hover docs and signature help
+  --       },
+  --     }
+  --   end,
+  --   opts = {
+  --     -- add any options here
+  --   },
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     'MunifTanjim/nui.nvim',
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     'rcarriga/nvim-notify',
+  --   },
+  -- },
   {
     'nvim-treesitter/nvim-treesitter-context',
     event = 'VeryLazy',
@@ -634,7 +634,7 @@ require('lazy').setup {
         'golangci-lint',
         'tflint',
         'bash-language-server',
-        'yaml-language-server',
+        -- 'yaml-language-server',
         'jsonlint',
         'buf-language-server',
         'delve',
@@ -771,19 +771,19 @@ require('lazy').setup {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   { 'godlygeek/tabular', event = 'VeryLazy' },
-  {
-    'kevinhwang91/nvim-ufo',
-    event = 'VeryLazy',
-    requires = 'kevinhwang91/promise-async',
-    config = function()
-      require('ufo').setup {
-        fold_virt_text_handler = foldHandler,
-        provider_selector = function(bufnr, filetype, buftype)
-          return { 'treesitter', 'indent' }
-        end,
-      }
-    end,
-  },
+  -- {
+  --   'kevinhwang91/nvim-ufo',
+  --   event = 'VeryLazy',
+  --   requires = 'kevinhwang91/promise-async',
+  --   config = function()
+  --     require('ufo').setup {
+  --       fold_virt_text_handler = foldHandler,
+  --       provider_selector = function(bufnr, filetype, buftype)
+  --         return { 'treesitter', 'indent' }
+  --       end,
+  --     }
+  --   end,
+  -- },
   { 'kevinhwang91/promise-async', lazy = true },
   { 'nvim-lua/plenary.nvim', lazy = true },
   {
@@ -800,7 +800,7 @@ require('lazy').setup {
   {
     'NeogitOrg/neogit',
     keys = {
-      { '<leader>gg', ':Neogit kind=vsplit<CR>', desc = 'Neogit split' },
+      { '<leader>gg', ':Neogit<CR>', desc = 'Neogit' },
     },
     dependencies = {
       'nvim-lua/plenary.nvim', -- required
@@ -970,7 +970,7 @@ require('lazy').setup {
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'go', 'proto', 'yaml', 'terraform', 'json' },
+        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'go', 'proto', 'yaml', 'terraform', 'json', 'java' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
