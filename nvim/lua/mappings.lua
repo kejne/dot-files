@@ -61,7 +61,6 @@ vim.keymap.set('n', 'gtt', ':GoTestFile<CR>', { desc = '[G]o [T]est', noremap = 
 vim.keymap.set('n', 'gts', ':GoTestSubCase<CR>', { desc = '[G]o [T]est [S]ubcase', noremap = true, silent = true })
 vim.keymap.set('n', 'gtc', ':GoCoverageToggle<CR>', { desc = '[G]o [T]est [C]overage', noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>nn', ':Noice dismiss<CR>', { desc = 'Dismiss [N]oise [N]otification', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>oi', ':ObsidianPasteImg<CR>', { desc = 'Obsidian Paste Image', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>owt"', 'ObsidianWorkspace team<CR>', { desc = 'Obsidian Team Workspace', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>owp"', 'ObsidianWorkspace personal<CR>', { desc = 'Obsidian Personal Workspace', noremap = true, silent = true })
