@@ -60,10 +60,12 @@ vim.keymap.set('n', 'gtf', ':GoTestFunc<CR>', { desc = '[G]o [T]est [F]unc', nor
 vim.keymap.set('n', 'gtt', ':GoTestFile<CR>', { desc = '[G]o [T]est', noremap = true, silent = true })
 vim.keymap.set('n', 'gts', ':GoTestSubCase<CR>', { desc = '[G]o [T]est [S]ubcase', noremap = true, silent = true })
 vim.keymap.set('n', 'gtc', ':GoCoverageToggle<CR>', { desc = '[G]o [T]est [C]overage', noremap = true, silent = true })
+vim.keymap.set('n', 'gtd', ':GoDebug<CR>', { desc = '[G]o [T]est [D]ebug', noremap = true, silent = true })
+vim.keymap.set('n', 'gtx', ':GoDebug --stop<CR>', { desc = '[Go] [T]est E[X]it', noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>oi', ':ObsidianPasteImg<CR>', { desc = 'Obsidian Paste Image', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>owt"', 'ObsidianWorkspace team<CR>', { desc = 'Obsidian Team Workspace', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>owp"', 'ObsidianWorkspace personal<CR>', { desc = 'Obsidian Personal Workspace', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>owt', ':ObsidianWorkspace team<CR>', { desc = 'Obsidian Team Workspace', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>owp', ':ObsidianWorkspace personal<CR>', { desc = 'Obsidian Personal Workspace', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>owd', ':ObsidianWorkspace default<CR>', { desc = 'Obsidian Default Workspace', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>oq', ':ObsidianQuickSwitch<CR>', { desc = 'ObsidianQuickSwitch', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>os', ':ObsidianSearch<CR>', { desc = 'Obsidian Search', noremap = true, silent = true })
@@ -74,12 +76,12 @@ vim.keymap.set('n', '<leader>oj', ':ObsidianToday<CR>', { desc = 'Journal', nore
 vim.keymap.set('n', '<leader>ob', ':ObsidianBacklinks<CR>', { desc = 'Backlinks', noremap = true, silent = true })
 -- Debugging
 vim.keymap.set('n', '<leader>db', ':DapToggleBreakpoint<CR>', { desc = 'Toggle Breakpoint', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>dc', ':DapContinue<CR>', { desc = 'Start Debugging', noremap = true, silent = true })
 vim.keymap.set('n', '<C-l>', ':DapStepInto<CR>', { desc = 'Debug Step Into', noremap = true, silent = true })
 vim.keymap.set('n', '<C-j>', ':DapStepOver<CR>', { desc = 'Debug Step Over', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>dt', ':DapTerminate<CR>', { desc = 'Debug Terminate', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>de', ':lua require("dapui").eval()<CR>', { desc = 'Debug evaluate', noremap = true, silent = true })
 vim.keymap.set('x', '<leader>de', ':lua require("dapui").eval()<CR>', { desc = 'Debug evaluate', noremap = true, silent = true })
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste and keep buffer', noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>zp', ':ZenMode | Pencil<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { desc = '[Z]en mode', noremap = true, silent = true })

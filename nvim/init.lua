@@ -41,36 +41,6 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 15
 
 vim.opt.tabstop = 4
-
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('wrap_spell', { clear = true }),
-  pattern = { 'gitcommit', 'markdown' },
-  callback = function()
-    vim.opt_local.textwidth = 120
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-    vim.opt_local.tabstop = 2
-    vim.opt_local.softtabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.expandtab = true
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'yaml',
-  callback = function()
-    vim.opt.tabstop = 2
-    vim.opt.softtabstop = 2
-    vim.opt.expandtab = true
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'tf',
-  callback = function()
-    vim.opt.tabstop = 2
-    vim.opt.softtabstop = 2
-    vim.opt.expandtab = true
-  end,
-})
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -79,6 +49,7 @@ vim.opt.hlsearch = true
 
 require 'mappings'
 require 'plugins'
+require 'format'
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -113,33 +84,6 @@ vim.opt.rtp:prepend(lazypath)
     Returns:
       - newVirtText: table containing the modified virtual text
   --]]
-local foldHandler = function(virtText, lnum, endLnum, width, truncate)
-  local newVirtText = {}
-  local suffix = (' 󰁂 %d '):format(endLnum - lnum)
-  local sufWidth = vim.fn.strdisplaywidth(suffix)
-  local targetWidth = width - sufWidth
-  local curWidth = 0
-  for _, chunk in ipairs(virtText) do
-    local chunkText = chunk[1]
-    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-    if targetWidth > curWidth + chunkWidth then
-      table.insert(newVirtText, chunk)
-    else
-      chunkText = truncate(chunkText, targetWidth - curWidth)
-      local hlGroup = chunk[2]
-      table.insert(newVirtText, { chunkText, hlGroup })
-      chunkWidth = vim.fn.strdisplaywidth(chunkText)
-      -- str width returned from truncate() may less than 2nd argument, need padding
-      if curWidth + chunkWidth < targetWidth then
-        suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
-      end
-      break
-    end
-    curWidth = curWidth + chunkWidth
-  end
-  table.insert(newVirtText, { suffix, 'MoreMsg' })
-  return newVirtText
-end
 
 require('lazy').setup {
   'towolf/vim-helm',
@@ -269,46 +213,6 @@ require('lazy').setup {
     opts = {},
     event = 'VeryLazy',
   },
-  -- {
-  --   'folke/noice.nvim',
-  --   event = 'VeryLazy',
-  --   config = function()
-  --     require('noice').setup {
-  --       lsp = {
-  --         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-  --         override = {
-  --           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-  --           ['vim.lsp.util.stylize_markdown'] = true,
-  --           ['cmp.entry.get_documentation'] = true,
-  --         },
-  --         hover = {
-  --           enabled = false,
-  --         },
-  --         signature = {
-  --           enabled = false,
-  --         },
-  --       },
-  --       presets = {
-  --         -- bottom_search = true, -- use a classic bottom cmdline for search
-  --         command_palette = true, -- position the cmdline and popupmenu togetherpl
-  --         long_message_to_split = true, -- long messages will be sent to a split
-  --         inc_rename = false, -- enables an input dialog for inc-rename.nvim
-  --         lsp_doc_border = false, -- add a border to hover docs and signature help
-  --       },
-  --     }
-  --   end,
-  --   opts = {
-  --     -- add any options here
-  --   },
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     'MunifTanjim/nui.nvim',
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     'rcarriga/nvim-notify',
-  --   },
-  -- },
   {
     'nvim-treesitter/nvim-treesitter-context',
     event = 'VeryLazy',
@@ -985,7 +889,13 @@ require('lazy').setup {
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
-
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    event = 'VeryLazy',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+  },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- put them in the right spots if you want.
