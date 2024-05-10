@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.cmd "let g:go_addtags_transform = 'camelcase'"
 vim.cmd 'highlight! HarpoonInactive guibg=NONE guifg=#63698c'
 vim.cmd 'highlight! HarpoonActive guibg=NONE guifg=white'
@@ -17,8 +18,8 @@ vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numh
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in status line
+
 vim.opt.showmode = false
-vim.opt.clipboard = 'unnamedplus'
 vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
@@ -881,17 +882,6 @@ require('lazy').setup {
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
       statusline.setup()
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we disable the section for
-      -- cursor information because line numbers are already enabled
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return ''
-      end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
 

@@ -8,6 +8,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('i', 'jj', '<Esc><Esc>', { desc = 'To normal mode' })
+vim.keymap.set('x', '<C-s>', '<Esc>:wa<CR>', { desc = 'Save all', noremap = true, silent = true })
 vim.keymap.set('i', '<C-s>', '<Esc>:wa<CR>', { desc = 'Save all', noremap = true, silent = true })
 vim.keymap.set('n', '<C-s>', ':wa<CR>', { desc = 'Save all', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>e', ':Neotree float<CR>', { desc = 'Toggle Explorer', noremap = true, silent = true })
@@ -43,6 +44,9 @@ vim.keymap.set('n', '<leader>h', '<C-w><C-h>', { desc = 'Move focus to the left 
 vim.keymap.set('n', '<leader>l', '<C-w><C-l>', { desc = 'Move focus to the right window', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>j', '<C-w><C-j>', { desc = 'Move focus to the lower window', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>k', '<C-w><C-k>', { desc = 'Move focus to the upper window', noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>y', '"+y', { desc = 'Copy to system clipboard', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from system clipboard', noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Go up and center' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Go down and center' })
@@ -82,6 +86,7 @@ vim.keymap.set('n', '<leader>dt', ':DapTerminate<CR>', { desc = 'Debug Terminate
 vim.keymap.set('n', '<leader>de', ':lua require("dapui").eval()<CR>', { desc = 'Debug evaluate', noremap = true, silent = true })
 vim.keymap.set('x', '<leader>de', ':lua require("dapui").eval()<CR>', { desc = 'Debug evaluate', noremap = true, silent = true })
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste and keep buffer', noremap = true, silent = true })
+vim.keymap.set('x', '<leader>y', '"+y', { desc = 'Copy to system clipboard', noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>zp', ':ZenMode | Pencil<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
