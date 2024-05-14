@@ -18,7 +18,6 @@ require('nvim-treesitter.configs').setup {
       enable = true,
       peek_definition_code = {
         ['DF'] = '@function.outer',
-        ['DF'] = '@class.outer',
       },
     },
     keymaps = {
@@ -71,14 +70,6 @@ require('nvim-treesitter.configs').setup {
         ['if'] = '@function.inner',
         ['ac'] = '@class.outer',
         ['ic'] = '@class.inner',
-        -- Or you can define your own textobjects like this
-        ['iF'] = {
-          python = '(function_definition) @function',
-          cpp = '(function_definition) @function',
-          c = '(function_definition) @function',
-          java = '(method_declaration) @function',
-          go = '(method_declaration) @function',
-        },
       },
     },
     swap = {
