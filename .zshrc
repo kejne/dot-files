@@ -12,7 +12,7 @@ source $ZSH/oh-my-zsh.sh
 source $DOTFILES/personal/aliases.sh
 source $DOTFILES/personal/git-functions.sh
 source $DOTFILES/personal/general-functions.sh
-source $DOTFILES/team/functions/functions
+source $DOTFILES/team/functions
 
 # LF config
 export EDITOR="nvim"

@@ -29,3 +29,11 @@ replace-all() {
   echo "Replacing all instances of <${FROM}> with <${TO}> in ${PWD}..."
   find ./ -type f -exec sed -i -e "s/$FROM/$TO/g" {} \;
 }
+
+function v(){
+  if [[ -z $1 ]]; then
+    nvim
+  else
+    z $1 && nvim
+  fi
+}
