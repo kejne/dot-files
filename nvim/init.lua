@@ -568,7 +568,6 @@ require('lazy').setup {
         'golangci-lint',
         'tflint',
         'bash-language-server',
-        -- 'yaml-language-server',
         'jsonlint',
         'buf-language-server',
         'delve',
@@ -894,7 +893,22 @@ require('lazy').setup {
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'go', 'proto', 'yaml', 'terraform', 'json', 'java' },
+        ensure_installed = {
+          'bash',
+          'c',
+          'html',
+          'lua',
+          'markdown',
+          'vim',
+          'vimdoc',
+          'go',
+          'proto',
+          'yaml',
+          'terraform',
+          'json',
+          'java',
+          'dockerfile',
+        },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
