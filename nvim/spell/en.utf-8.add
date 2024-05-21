@@ -1,5 +1,6 @@
 Kubernetes
 onboarding
+<<<<<<< Updated upstream
 offboarding
 Github
 Jira
@@ -18,3 +19,7 @@ Kaj
 Fehlhaber
 serverless
 Youtube
+=======
+DynamoDB
+serverless
+>>>>>>> Stashed changes

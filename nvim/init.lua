@@ -219,6 +219,7 @@ require('lazy').setup {
     event = 'VeryLazy',
     opts = {
       window = {
+        width = 125,
         options = {
           signcolumn = 'no', -- disable signcolumn
           number = false, -- disable number column
@@ -227,16 +228,16 @@ require('lazy').setup {
       },
     },
   },
-  {
-    'folke/twilight.nvim',
-    event = 'VeryLazy',
-    opts = {
-      dimming = {
-        alpha = 0.4, -- amount of dimming
-      },
-      context = 15, -- amount of lines we will try to show around the current line
-    },
-  },
+  -- {
+  --   'folke/twilight.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     dimming = {
+  --       alpha = 0.4, -- amount of dimming
+  --     },
+  --     context = 15, -- amount of lines we will try to show around the current line
+  --   },
+  -- },
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
