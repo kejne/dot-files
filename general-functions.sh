@@ -30,10 +30,10 @@ replace-all() {
   find ./ -type f -exec sed -i -e "s/$FROM/$TO/g" {} \;
 }
 
-function v(){
+v() {
   if [[ -z $1 ]]; then
     nvim
   else
-    z $1 && nvim
+    z $1 && nvim .
   fi
 }

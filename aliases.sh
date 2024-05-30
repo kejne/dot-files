@@ -5,8 +5,8 @@ alias zshconfig="vim ~/.zshrc"
 alias ..='cd ..'
 alias ...='cd ../..'
 
+alias vpnup='nmcli con up id WirelessCar_vpn'
 alias ks='k9s'
-alias v='nvim'
 alias skn='sk -n'
 alias skN='sk -N'
 alias sd='cd ~/git && cd "~/git/$(find * -type d | fzf)"'

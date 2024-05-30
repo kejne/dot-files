@@ -18,6 +18,8 @@ format = ' [⎈ $context](blue bold) | [$namespace](red) '
 disabled = false
 
 contexts = [
+  { context_pattern = "arn:aws:eks:eu-west-1:667487020092:cluster/thirsty-austin", context_alias = "development", style = "azure", symbol = "☁️ "},
+  { context_pattern = "arn:aws:eks:us-east-1:667487020092:cluster/cool-newton", context_alias = "production", style = "azure", symbol = "☁️ "},
   { context_pattern = "arn:aws:eks:eu-west-1:667487020092:cluster/cls-wdp-ng", context_alias = "mother-of-all", style = "blue", symbol = "☁️ "},
   { context_pattern = "kind-kind", context_alias = "local", style = "green", symbol = "🎮 "},
 ]

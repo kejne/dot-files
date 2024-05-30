@@ -1,7 +1,7 @@
-export GOPRIVATE=github.com/cariad-odp/*
+export GOPRIVATE=github.com/WirelessCar-WDP
 export GOBIN=$HOME/go/bin
 export GOPATH=$HOME/go/bin
-export PATH=$PATH:$HOME/.local/go/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$GOBIN
+export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$GOBIN
 export ZSH="$HOME/.oh-my-zsh"
 DOTFILES="$HOME/.config/dotfiles"
 
@@ -23,7 +23,7 @@ alias lf='lfcd'
 
 # Map wacom tablet to single monitor
 xsetwacom --set "12" MapToOutput DP-1-3-8
-xsetwacom --set "11" MapToOutput DP-1-3-8
+xsetwacom --set "13" MapToOutput DP-1-3-8
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(direnv hook zsh)"

@@ -635,10 +635,6 @@ require('lazy').setup {
     opts = {
       workspaces = {
         {
-          name = 'team',
-          path = '~/second-brain/team',
-        },
-        {
           name = 'personal',
           path = '~/second-brain/personal',
         },
