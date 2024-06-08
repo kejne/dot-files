@@ -572,6 +572,10 @@ require('lazy').setup {
         'jsonlint',
         'buf-language-server',
         'delve',
+        'tailwindcss-language-server',
+        'templ',
+        'html-lsp',
+        'htmx-lsp',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -905,6 +909,7 @@ require('lazy').setup {
           'json',
           'java',
           'dockerfile',
+          'templ',
         },
         -- Autoinstall languages that are not installed
         auto_install = true,
@@ -947,5 +952,6 @@ require('lazy').setup {
   -- { import = 'custom.plugins' },
 }
 
+require 'lsp'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
