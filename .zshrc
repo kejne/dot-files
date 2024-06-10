@@ -5,7 +5,8 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/go/bin:$HOME/bin:$
 export ZSH="$HOME/.oh-my-zsh"
 DOTFILES="$HOME/.config/dotfiles"
 
-plugins=(z git pip zsh-navigation-tools zsh-interactive-cd terraform golang docker docker-compose zsh-vi-mode kubectl)
+plugins=(z git pip zsh-navigation-tools zsh-interactive-cd terraform golang docker docker-compose zsh-vi-mode kubectl task)
+autoload -U compinit && compinit
 bindkey -v
 
 source $ZSH/oh-my-zsh.sh

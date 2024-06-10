@@ -55,8 +55,8 @@ vim.keymap.set('n', '<leader>ra', ':lua require("spectre").toggle()<CR>', { desc
 vim.keymap.set('n', '<leader>rw', ':lua require("spectre").open_visual({select_word = true})<CR>', { desc = '[R]eplace [A]ll', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>rr', ':lua require("spectre").open_file_search({select_word = true})<CR>', { desc = '[R]eplace', noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>xq', ':lua require("trouble").toggle("quickfix")<CR>', { desc = '[X] Error [Q]uickfix', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>xx', ':lua require("trouble").toggle()<CR>', { desc = '[X] Error E[X]plore', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>xq', ':Trouble quickfix<CR>', { desc = '[X] Error [Q]uickfix', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>xx', ':Trouble diagnostics<CR>', { desc = '[X] Error E[X]plore', noremap = true, silent = true })
 
 vim.keymap.set('n', 'gm', ':GoImports<CR>', { desc = '[G]o I[M]ports', noremap = true, silent = true })
 vim.keymap.set('n', 'gav', ':GoAltV<CR>', { desc = '[G]o [A]lternate [V]split', noremap = true, silent = true })
