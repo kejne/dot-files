@@ -30,10 +30,18 @@ replace-all() {
   find ./ -type f -exec sed -i -e "s/$FROM/$TO/g" {} \;
 }
 
+awssh() {
+  if [[ -z $1 ]]; then
+    echo "Please provide a profile."
+  else
+    aws-vault exec $1 -- zsh
+  fi
+}
+
 v() {
   if [[ -z $1 ]]; then
     nvim
   else
-    z $1 && nvim .
+    [[ -f $1 ]] && nvim $1 || (z $1 && nvim .)
   fi
 }

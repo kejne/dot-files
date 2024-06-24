@@ -5,14 +5,15 @@ vim.keymap.set('n', 'L', '$')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('i', 'jj', '<Esc><Esc>', { desc = 'To normal mode' })
 vim.keymap.set('x', '<C-s>', '<Esc>:wa<CR>', { desc = 'Save all', noremap = true, silent = true })
 vim.keymap.set('i', '<C-s>', '<Esc>:wa<CR>', { desc = 'Save all', noremap = true, silent = true })
 vim.keymap.set('n', '<C-s>', ':wa<CR>', { desc = 'Save all', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>e', ':Neotree float<CR>', { desc = 'Toggle Explorer', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>e', ':Neotree toggle float<CR>', { desc = 'Toggle Explorer', noremap = true, silent = true })
 
+vim.keymap.set('n', '-', ':Oil<CR>', { desc = 'Explore with Oil' })
 -- Harpoon
 vim.keymap.set('n', '<leader>m', ':lua require("harpoon.mark").add_file()<CR>', { desc = 'Mark Harpoon', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>mm', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Harpoon Menu', noremap = true, silent = true })
@@ -90,8 +91,16 @@ vim.keymap.set('x', '<leader>y', '"+y', { desc = 'Copy to system clipboard', nor
 
 vim.keymap.set('n', '<leader>zp', ':ZenMode | Pencil<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>tw', ':Twilight<CR>', { desc = '[T]oggle T[W]ilight', noremap = true, silent = true })
+-- vim.keymap.set('n', '<leader>tw', ':Twilight<CR>', { desc = '[T]oggle T[W]ilight', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gc', ':ChatGPT<CR>', { desc = 'Chat[G]pt [C]hat', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
 vim.keymap.set('v', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
 vim.keymap.set('v', '<leader>ge', ':ChatGPTEditWithInstructions<CR>', { desc = 'Chat[G]pt [E]dit With Instructions' })
+
+vim.keymap.set('n', '<leader>cc', ':CopilotChat<CR>', { desc = '[C]opilot [C]hat' })
+vim.keymap.set('x', '<leader>cq', function()
+  local input = vim.fn.input 'Quick Chat: '
+  if input ~= '' then
+    require('CopilotChat').ask(input .. '. No explainations.', { selection = require('CopilotChat.select').visual })
+  end
+end, { desc = 'CopilotChat - Quick chat' })

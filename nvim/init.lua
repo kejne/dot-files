@@ -116,6 +116,47 @@ vim.opt.rtp:prepend(lazypath)
   --]]
 
 require('lazy').setup {
+  {
+    'zbirenbaum/copilot.lua',
+    event = 'VeryLazy',
+    config = function()
+      require('copilot').setup {
+        suggestion = {
+          enabled = false,
+          keymap = {
+            accept = '<C-y>',
+            next = '<C-j>',
+            prev = '<C-k>',
+            dismiss = '<C-c>',
+          },
+        },
+        panel = { enabled = false },
+        filetypes = {
+          yaml = true,
+        },
+      }
+    end,
+  },
+  {
+    'zbirenbaum/copilot-cmp',
+    event = 'VeryLazy',
+    config = function()
+      require('copilot_cmp').setup()
+    end,
+  },
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    branch = 'canary',
+    dependencies = {
+      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+    },
+    opts = {
+      debug = true, -- Enable debugging
+      -- See Configuration section for rest
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
   'towolf/vim-helm',
   'xiyaowong/transparent.nvim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -703,6 +744,13 @@ require('lazy').setup {
     opts = {},
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('oil').setup {
+        default_file_explorer = true,
+        skip_confirm_for_simple_edits = true,
+        prompt_save_on_select_new_entry = false,
+      }
+    end,
   },
   { 'godlygeek/tabular', event = 'VeryLazy' },
   -- {
@@ -767,6 +815,7 @@ require('lazy').setup {
       -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
+      'zbirenbaum/copilot-cmp',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
@@ -783,6 +832,23 @@ require('lazy').setup {
       luasnip.config.setup {}
 
       cmp.setup {
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            require('copilot_cmp.comparators').prioritize,
+            -- Below is the default comparitor list and order for nvim-cmp
+            cmp.config.compare.offset,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -794,6 +860,10 @@ require('lazy').setup {
         -- chosen, you will need to read `:help ins-completion`
         --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
           ['<C-j>'] = cmp.mapping.select_next_item(),
@@ -830,6 +900,7 @@ require('lazy').setup {
           end, { 'i', 's' }),
         },
         sources = {
+          { name = 'copilot', group_index = 2 },
           { name = 'emoji' },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
