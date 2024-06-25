@@ -19,12 +19,12 @@ lfcd() {
 alias lf='lfcd'
 
 # Map wacom tablet to single monitor
-xinput list | grep Wacom | sed -n 's/.*id=\([0-9]*\).*/\1/p' | xargs -I {} xsetwacom --set {} MapToOutput DP-1-3-8
+xinput list | grep Wacom | sed -n 's/.*id=\([0-9]*\).*/\1/p' | xargs -I {} xsetwacom --set {} MapToOutput DP-3-3-8
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 source <(kubectl completion zsh)
-source $ZSH/plugins/git/git.plugin.zsh
+# source $ZSH/plugins/git/git.plugin.zsh
 source <(gh completion -s zsh)
 
 ### Added by Zinit's installer
@@ -110,3 +110,4 @@ eval "$(direnv hook zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(gh copilot alias -- zsh)"
