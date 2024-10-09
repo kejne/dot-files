@@ -62,6 +62,14 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'helm',
+  callback = function()
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+    vim.opt.expandtab = true
+  end,
+})
+vim.api.nvim_create_autocmd('FileType', {
   pattern = 'yaml',
   callback = function()
     vim.opt.tabstop = 2
@@ -117,6 +125,14 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
   {
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {},
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+  },
+  'JoosepAlviste/nvim-ts-context-commentstring',
+  {
     'zbirenbaum/copilot.lua',
     event = 'VeryLazy',
     config = function()
@@ -152,7 +168,8 @@ require('lazy').setup {
       { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
     },
     opts = {
-      debug = true, -- Enable debugging
+      -- debug = true, -- Enable debugging
+      context = 'buffers',
       -- See Configuration section for rest
     },
     -- See Commands section for default commands if you want to lazy load on them
@@ -161,40 +178,24 @@ require('lazy').setup {
   'xiyaowong/transparent.nvim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
-  {
-    'huynle/ogpt.nvim',
-    event = 'VeryLazy',
-    opts = {
-      default_provider = 'ollama',
-      actions_paths = {
-        '/home/ab000069/.config/ogpt',
-        -- debug.getinfo(1, 'S').source:sub(2):match '(.*/)' .. 'actions.json',
-      },
-    },
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-    },
-  },
-  {
-    'jackMort/ChatGPT.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('chatgpt').setup {
-        api_key_cmd = 'pass show openai',
-        openai_params = {
-          model = 'gpt-3.5-turbo',
-        },
-      }
-    end,
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'nvim-lua/plenary.nvim',
-      'folke/trouble.nvim',
-      'nvim-telescope/telescope.nvim',
-    },
-  },
+  -- {
+  --   'jackMort/ChatGPT.nvim',
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     require('chatgpt').setup {
+  --       api_key_cmd = 'pass show openai',
+  --       openai_params = {
+  --         model = 'gpt-3.5-turbo',
+  --       },
+  --     }
+  --   end,
+  --   dependencies = {
+  --     'MunifTanjim/nui.nvim',
+  --     'nvim-lua/plenary.nvim',
+  --     'folke/trouble.nvim',
+  --     'nvim-telescope/telescope.nvim',
+  --   },
+  -- },
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -269,16 +270,6 @@ require('lazy').setup {
       },
     },
   },
-  -- {
-  --   'folke/twilight.nvim',
-  --   event = 'VeryLazy',
-  --   opts = {
-  --     dimming = {
-  --       alpha = 0.4, -- amount of dimming
-  --     },
-  --     context = 15, -- amount of lines we will try to show around the current line
-  --   },
-  -- },
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -299,7 +290,7 @@ require('lazy').setup {
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim', event = 'VeryLazy', opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following lua:
@@ -341,13 +332,13 @@ require('lazy').setup {
       require('which-key').setup()
 
       -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-      }
+      -- require('which-key').register {
+      --   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+      --   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+      --   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+      --   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+      --   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+      -- }
     end,
   },
 
@@ -678,6 +669,9 @@ require('lazy').setup {
       'hrsh7th/nvim-cmp',
     },
     opts = {
+      ui = {
+        enable = false,
+      },
       workspaces = {
         {
           name = 'personal',
@@ -749,6 +743,13 @@ require('lazy').setup {
         default_file_explorer = true,
         skip_confirm_for_simple_edits = true,
         prompt_save_on_select_new_entry = false,
+        view_options = {
+          show_hidden = true,
+          natural_order = true,
+          is_always_hidden = function(name, _)
+            return name == '..' or name == '.git'
+          end,
+        },
       }
     end,
   },
@@ -971,6 +972,7 @@ require('lazy').setup {
           'html',
           'lua',
           'markdown',
+          'markdown_inline',
           'vim',
           'vimdoc',
           'go',
@@ -981,6 +983,8 @@ require('lazy').setup {
           'java',
           'dockerfile',
           'templ',
+          'helm',
+          'http',
         },
         -- Autoinstall languages that are not installed
         auto_install = true,

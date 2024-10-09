@@ -14,14 +14,10 @@ add_newline = true
 # disabled = true
 
 [kubernetes]
-format = ' [⎈ $context](blue bold) | [$namespace](red) '
 disabled = false
+style = 'italic cyan'
+format = '[⎈$context]($style)|[$namespace]($style) 📁'
 
-contexts = [
-  { context_pattern = "arn:aws:eks:eu-west-1:667487020092:cluster/thirsty-austin", context_alias = "dev-vert-dev", style = "azure", symbol = "☁️ "},
-  { context_pattern = "arn:aws:eks:us-east-1:667487020092:cluster/cool-newton", context_alias = "dev-vert-prod", style = "azure", symbol = "☁️ "},
-  { context_pattern = "arn:aws:eks:eu-west-1:667487020092:cluster/cls-wdp-ng", context_alias = "platform-dev", style = "blue", symbol = "☁️ "},
-  { context_pattern = "arn:aws:eks:eu-west-1:891377205362:cluster/clever-burnell", context_alias = "platform-prod", style = "blue", symbol = "☁️ "},
-  { context_pattern = "arn:aws:eks:eu-west-1:891377205362:cluster/great-gauss", context_alias = "prod-vert-prod", style = "blue", symbol = "☁️ "},
-  { context_pattern = "kind-kind", context_alias = "local", style = "green", symbol = "🎮 "},
-]
+[[kubernetes.contexts]]
+context_pattern = 'arn.*/(?P<cluster>.*)'
+context_alias = "$cluster"
