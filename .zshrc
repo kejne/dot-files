@@ -1,7 +1,8 @@
 export GOPRIVATE=github.com/WirelessCar-WDP
 export GOBIN=$HOME/go/bin
 export GOPATH=$HOME/go/bin
-export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$GOBIN
+export CARGOBIN=$HOME/.cargo/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/bin:$HOME/.local/bin:$GOBIN:$CARGOBIN
 export ZSH="$HOME/.oh-my-zsh"
 DOTFILES="$HOME/.config/dotfiles"
 
@@ -19,7 +20,8 @@ lfcd() {
 alias lf='lfcd'
 
 # Map wacom tablet to single monitor
-xinput list | grep Wacom | sed -n 's/.*id=\([0-9]*\).*/\1/p' | xargs -I {} xsetwacom --set {} MapToOutput DP-3-3-8
+MONITOR=$(xrandr | grep " connected.*597" | cut -d " " -f 1 -)
+xinput list | grep Wacom | sed -n 's/.*id=\([0-9]*\).*/\1/p' | xargs -I {} xsetwacom --set {} MapToOutput $MONITOR
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -96,8 +98,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='ls --color'
-alias ll='ls -al --color'
 alias vim='nvim'
 alias c='clear'
 
@@ -111,3 +111,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 eval "$(gh copilot alias -- zsh)"
+source <(drv completion zsh)

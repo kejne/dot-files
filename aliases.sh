@@ -6,6 +6,8 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 alias vpnup='nmcli con up id WirelessCar_vpn'
+alias ls=eza
+alias ll='eza -al'
 alias k=kubectl
 alias t=task
 alias ks='k9s'

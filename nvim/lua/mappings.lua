@@ -99,6 +99,9 @@ vim.keymap.set('n', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
 vim.keymap.set('v', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
 vim.keymap.set('v', '<leader>ge', ':ChatGPTEditWithInstructions<CR>', { desc = 'Chat[G]pt [E]dit With Instructions' })
 
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move highlighted line up', silent = true })
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move highlighted line down', silent = true })
+
 vim.keymap.set('n', '<leader>cc', ':CopilotChat<CR>', { desc = '[C]opilot [C]hat' })
 vim.keymap.set('x', '<leader>cq', function()
   local input = vim.fn.input 'Quick Chat: '

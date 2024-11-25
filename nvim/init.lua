@@ -124,6 +124,19 @@ vim.opt.rtp:prepend(lazypath)
   --]]
 
 require('lazy').setup {
+  { 'subnut/nvim-ghost.nvim' },
+  {
+    'pwntester/octo.nvim',
+    event = 'VeryLazy',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('octo').setup()
+    end,
+  },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     opts = {},
