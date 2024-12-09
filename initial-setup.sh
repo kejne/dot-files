@@ -5,9 +5,8 @@ echo "#   1. Updating system                             #"
 echo "####################################################"
 wget -qO - https://regolith-desktop.org/regolith.key | \
 gpg --dearmor | sudo tee /usr/share/keyrings/regolith-archive-keyring.gpg > /dev/null
-
 echo deb "[arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] \
-https://regolith-desktop.org/release-3_1-ubuntu-jammy-amd64 jammy main" | \
+https://regolith-desktop.org/release-3_2-ubuntu-noble-amd64 noble main" | \
 sudo tee /etc/apt/sources.list.d/regolith.list
 
 sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
@@ -32,7 +31,7 @@ ln -s ~/.local/kitty.app/bin/kitten
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew install gcc starship kubectl gh golang helm fzf zoxide rust bat spotify-tui
+brew install gcc starship kubectl gh golang helm fzf zoxide rust bat
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 gh auth login
@@ -61,4 +60,4 @@ cd ~/second-brain
 ln -s ~/git/kaj/second-brain personal
 
 env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
-go install github.com/erikkinding/sk
+go install github.com/erikkinding/sk@latest
