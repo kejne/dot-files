@@ -59,7 +59,7 @@ vim.keymap.set('n', '<leader>rr', ':lua require("spectre").open_file_search({sel
 vim.keymap.set('n', '<leader>xq', ':Trouble quickfix<CR>', { desc = '[X] Error [Q]uickfix', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>xx', ':Trouble diagnostics<CR>', { desc = '[X] Error E[X]plore', noremap = true, silent = true })
 
-vim.keymap.set('n', 'gm', ':GoImports<CR>', { desc = '[G]o I[M]ports', noremap = true, silent = true })
+vim.keymap.set('n', 'gp', ':GoImports<CR>', { desc = '[G]o I[M]ports', noremap = true, silent = true })
 vim.keymap.set('n', 'gav', ':GoAltV<CR>', { desc = '[G]o [A]lternate [V]split', noremap = true, silent = true })
 vim.keymap.set('n', 'gaa', ':GoAlt<CR>', { desc = '[G]o [A]lternate', noremap = true, silent = true })
 vim.keymap.set('n', 'gtf', ':GoTestFunc<CR>', { desc = '[G]o [T]est [F]unc', noremap = true, silent = true })

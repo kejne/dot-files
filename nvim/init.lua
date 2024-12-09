@@ -8,9 +8,9 @@ vim.cmd 'highlight! HarpoonActive guibg=NONE guifg=white'
 vim.cmd 'highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7'
 vim.cmd 'highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7'
 vim.cmd 'highlight! TabLineFill guibg=NONE guifg=#303030'
-vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
+vim.o.foldcolumn = '0' -- '0' is not bad
+-- vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+-- vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.cmd 'set conceallevel=2'
 vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
@@ -25,7 +25,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
-vim.opt.updatetime = 250
+vim.opt.updatetime = 200
 vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -77,6 +77,15 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt.expandtab = true
   end,
 })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'go',
+  callback = function()
+    vim.opt.tabstop = 4
+    vim.opt.softtabstop = 4
+    vim.opt.expandtab = true
+  end,
+})
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'tf',
   callback = function()
@@ -175,7 +184,6 @@ require('lazy').setup {
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
-    branch = 'canary',
     dependencies = {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
       { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
@@ -615,7 +623,6 @@ require('lazy').setup {
         'tflint',
         'bash-language-server',
         'jsonlint',
-        'buf-language-server',
         'delve',
         'tailwindcss-language-server',
         'templ',
@@ -930,15 +937,18 @@ require('lazy').setup {
     -- change the command in the config to whatever the name of that colorscheme is
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
+    -- 'ellisonleao/gruvbox.nvim',
     'folke/tokyonight.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
+      vim.o.background = 'dark'
+      -- vim.cmd.colorscheme 'gruvbox'
       vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
 
@@ -948,6 +958,7 @@ require('lazy').setup {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
+      require('mini.files').setup()
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -955,6 +966,7 @@ require('lazy').setup {
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
+      require('mini.operators').setup()
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
