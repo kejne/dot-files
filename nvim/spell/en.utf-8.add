@@ -63,3 +63,8 @@ PoC
 DevOps
 Podman
 Dockerfile
+ContainerFile
+distroless
+jre
+backend
+ECR
