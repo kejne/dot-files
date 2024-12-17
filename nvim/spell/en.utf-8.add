@@ -68,3 +68,5 @@ distroless
 jre
 backend
 ECR
+X11
+Taskfile

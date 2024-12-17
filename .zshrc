@@ -4,6 +4,7 @@ export GOPATH=$HOME/go/bin
 export CARGOBIN=$HOME/.cargo/bin
 export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/bin:$HOME/.local/bin:$GOBIN:$CARGOBIN
 export ZSH="$HOME/.oh-my-zsh"
+export BAT_THEME=gruvbox-dark
 DOTFILES="$HOME/.config/dotfiles"
 
 # source $ZSH/oh-my-zsh.sh

@@ -94,6 +94,7 @@ vim.keymap.set('x', '<leader>y', '"+y', { desc = 'Copy to system clipboard', nor
 vim.keymap.set('n', '<leader>zp', ':ZenMode | Pencil<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>tw', ':Twilight<CR>', { desc = '[T]oggle T[W]ilight', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gd', ':DiffviewfileHistory %<CR>', { desc = '[G]it [D]iff History', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gc', ':ChatGPT<CR>', { desc = 'Chat[G]pt [C]hat', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
 vim.keymap.set('v', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
@@ -103,6 +104,7 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move highlighted line up'
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move highlighted line down', silent = true })
 
 vim.keymap.set('n', '<leader>cc', ':CopilotChat<CR>', { desc = '[C]opilot [C]hat' })
+vim.keymap.set('x', '<leader>cc', ':CopilotChat<CR>', { desc = '[C]opilot [C]hat' })
 vim.keymap.set('x', '<leader>cq', function()
   local input = vim.fn.input 'Quick Chat: '
   if input ~= '' then

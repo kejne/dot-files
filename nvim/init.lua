@@ -133,6 +133,7 @@ vim.opt.rtp:prepend(lazypath)
   --]]
 
 require('lazy').setup {
+  { 'sindrets/diffview.nvim' },
   { 'subnut/nvim-ghost.nvim' },
   {
     'pwntester/octo.nvim',
