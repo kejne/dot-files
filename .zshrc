@@ -1,10 +1,11 @@
-export GOPRIVATE=github.com/WirelessCar-WDP
+export GOPRIVATE=github.com/WirelessCar-WDP,github.com/WDP-*
 export GOBIN=$HOME/go/bin
 export GOPATH=$HOME/go/bin
 export CARGOBIN=$HOME/.cargo/bin
 export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/bin:$HOME/.local/bin:$GOBIN:$CARGOBIN
 export ZSH="$HOME/.oh-my-zsh"
 export BAT_THEME=gruvbox-dark
+export ANTHROPIC_API_KEY=$(pass show anthropic)
 DOTFILES="$HOME/.config/dotfiles"
 
 # source $ZSH/oh-my-zsh.sh
@@ -23,6 +24,7 @@ alias lf='lfcd'
 # Map wacom tablet to single monitor
 MONITOR=$(xrandr | grep " connected.*597" | cut -d " " -f 1 -)
 xinput list | grep Wacom | sed -n 's/.*id=\([0-9]*\).*/\1/p' | xargs -I {} xsetwacom --set {} MapToOutput $MONITOR
+/usr/bin/setxkbmap -option "ctrl:nocaps"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
