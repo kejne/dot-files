@@ -133,72 +133,61 @@ vim.opt.rtp:prepend(lazypath)
   --]]
 
 require('lazy').setup {
+  rocks = {
+    hererocks = true,
+  },
+  {
+    'rest-nvim/rest.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        table.insert(opts.ensure_installed, 'http')
+      end,
+    },
+  },
   {
     'saghen/blink.cmp',
-    -- optional: provides snippets for the snippet source
     dependencies = 'rafamadriz/friendly-snippets',
 
-    -- use a release tag to download pre-built binaries
-    version = '*',
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
+    version = '1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      --
-      -- All presets have the following mappings:
-      -- C-space: Open menu or open docs if already open
-      -- C-e: Hide menu
-      -- C-k: Toggle signature help
-      --
-      -- See the full "keymap" documentation for information on defining your own keymap.
-      keymap = { preset = 'default' },
-
+      keymap = { preset = 'default', ['<C-k>'] = { 'select_prev', 'fallback' }, ['<C-j>'] = { 'select_next', 'fallback' } },
+      signature = { enabled = true },
+      completion = {
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
+      },
       appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- Will be removed in a future release
         use_nvim_cmp_as_default = true,
-        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono',
       },
-
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      snippets = { preset = 'default' },
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
 
-      -- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance
-      -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-      -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-      --
-      -- See the fuzzy documentation for more information
       fuzzy = { implementation = 'prefer_rust_with_warning' },
     },
     opts_extend = { 'sources.default' },
   },
   { 'sindrets/diffview.nvim' },
   { 'subnut/nvim-ghost.nvim' },
-  {
-    'pwntester/octo.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require('octo').setup()
-    end,
-  },
+  -- {
+  --   'pwntester/octo.nvim',
+  --   event = 'VeryLazy',
+  --   priority = 1,
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     -- 'nvim-telescope/telescope.nvim',
+  --     'folke/snacks.nvim',
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  --   config = function()
+  --     require('octo').setup()
+  --   end,
+  -- },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     opts = {},
@@ -236,12 +225,24 @@ require('lazy').setup {
   --   end,
   -- },
   {
+    'zbirenbaum/copilot.lua',
+    lazy = true,
+    config = function()
+      require('copilot').setup()
+    end,
+  },
+  {
     'CopilotC-Nvim/CopilotChat.nvim',
+    version = '*',
+    event = 'VeryLazy',
     dependencies = {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
-      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+      { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log wrapper
     },
+    build = 'make tiktoken', -- Only on MacOS or Linux
     opts = {
+      model = 'gpt-4o-2024-11-20', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+      agent = 'copilot',
       -- debug = true, -- Enable debugging
       context = 'buffers',
       -- See Configuration section for rest
@@ -473,7 +474,6 @@ require('lazy').setup {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'saghen/blink.cmp',
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
@@ -778,19 +778,19 @@ require('lazy').setup {
       }
     end,
   },
-  {
-    'NeogitOrg/neogit',
-    keys = {
-      { '<leader>gg', ':Neogit<CR>', desc = 'Neogit' },
-    },
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim', -- optional
-      'ibhagwan/fzf-lua', -- optional
-    },
-    config = true,
-  },
+  -- {
+  --   'NeogitOrg/neogit',
+  --   keys = {
+  --     { '<leader>gg', ':Neogit<CR>', desc = 'Neogit' },
+  --   },
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim', -- required
+  --     'nvim-telescope/telescope.nvim', -- optional
+  --     'sindrets/diffview.nvim', -- optional
+  --     'ibhagwan/fzf-lua', -- optional
+  --   },
+  --   config = true,
+  -- },
   -- { -- Autocompletion
   --   'hrsh7th/nvim-cmp',
   --   event = 'InsertEnter',
@@ -927,6 +927,7 @@ require('lazy').setup {
   {
     'folke/snacks.nvim',
     priority = 1000,
+    version = '*',
     lazy = false,
     ---@type snacks.Config
     opts = {
@@ -934,31 +935,43 @@ require('lazy').setup {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
       bigfile = { enabled = true },
-      dashboard = { enabled = true },
-      explorer = { enabled = true },
+      -- dashboard = { enabled = true },
+      explorer = {
+        enabled = true,
+      },
       indent = { enabled = true },
       input = { enabled = true },
-      picker = { enabled = true },
+      picker = {
+        files = {
+          show_hidden = true,
+        },
+        enabled = true,
+        formatters = {
+          file = {
+            truncate = 80, -- truncate the file path to (roughly) this length
+          },
+        },
+      },
       notifier = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
-      scroll = {
-        enabled = true,
-        animate = {
-          duration = { step = 10, total = 100 },
-          easing = 'linear',
-        },
-        -- faster animation when repeating scroll after delay
-        animate_repeat = {
-          delay = 100, -- delay in ms before using the repeat animation
-          duration = { step = 10, total = 50 },
-          easing = 'linear',
-        },
-        -- what buffers to animate
-        filter = function(buf)
-          return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= 'terminal'
-        end,
-      },
+      -- scroll = {
+      --   enabled = true,
+      --   animate = {
+      --     duration = { step = 10, total = 100 },
+      --     easing = 'linear',
+      --   },
+      --   -- faster animation when repeating scroll after delay
+      --   animate_repeat = {
+      --     delay = 100, -- delay in ms before using the repeat animation
+      --     duration = { step = 10, total = 50 },
+      --     easing = 'linear',
+      --   },
+      --   -- what buffers to animate
+      --   filter = function(buf)
+      --     return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= 'terminal'
+      --   end,
+      -- },
       statuscolumn = { enabled = true },
       words = { enabled = true },
     },
