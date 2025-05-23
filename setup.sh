@@ -9,7 +9,7 @@ sudo tee /etc/apt/sources.list.d/regolith.list
 
 sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
 
-sudo apt install p7zip-full libsecret-tools git python3 python3-pip python-is-python3 zsh curl fonts-powerline flameshot build-essential regolith-desktop regolith-session-flashback regolith-look-gruvbox i3xrocks-battery i3xrocks-memory gpg pass ripgrep direnv libreadline-dev luarocks lua-5.1 -y
+sudo apt install p7zip-full libsecret-tools git python3 python3-pip python-is-python3 zsh curl fonts-powerline flameshot build-essential regolith-desktop regolith-session-flashback regolith-look-gruvbox i3xrocks-battery i3xrocks-memory gpg pass ripgrep direnv libreadline-dev luarocks lua-5.1 stow -y
 
 sudo snap install code obsidian --classic
 sudo snap install slack firefox spotify
