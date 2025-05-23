@@ -1,0 +1,20 @@
+[tools]
+bat = "latest"
+eza = "latest"
+fzf = "latest"
+gh = "latest"
+go = "latest"
+"go:github.com/erikkinding/sk" = "latest"
+"go:github.com/nats-io/nats-server/v2" = "latest"
+"go:github.com/nats-io/natscli/nats" = "latest"
+helm = "latest"
+kubectl = "latest"
+nsc = "latest"
+rust = "latest"
+starship = "latest"
+"ubi:gokcehan/lf" = "latest"
+"ubi:kovidgoyal/kitty" = "latest"
+zoxide = "latest"
+
+[settings]
+experimental = true

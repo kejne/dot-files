@@ -1,11 +1,11 @@
 alias vpn-on='protonvpn-cli c -f'
 alias vpn-no='protonvpn-cli d'
+alias vpnup='nmcli con up id WirelessCar_vpn'
 
 alias zshconfig="vim ~/.zshrc"
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias vpnup='nmcli con up id WirelessCar_vpn'
 alias ls=eza
 alias ll='eza -al'
 alias k=kubectl
@@ -16,7 +16,6 @@ alias ks='k9s'
 alias skn='sk -n'
 alias skN='sk -N'
 alias sd='cd ~/git && cd "~/git/$(find * -type d | fzf)"'
-alias home-monitors='xrandr --output DP-1-3-8 --left-of eDP-1 && xrandr --output DP-3 --left-of DP-1-3-8'
 
 # Open Neovim at common locations
 alias vv='cd ~/git/src/github.com && nvim'

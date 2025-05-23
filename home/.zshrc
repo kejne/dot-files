@@ -6,13 +6,11 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/bin:$HOME/.local/b
 export ZSH="$HOME/.oh-my-zsh"
 export BAT_THEME=gruvbox-dark
 export ANTHROPIC_API_KEY=$(pass show anthropic)
-DOTFILES="$HOME/.config/dotfiles"
 
-# source $ZSH/oh-my-zsh.sh
-source $DOTFILES/personal/aliases.sh
-source $DOTFILES/personal/git-functions.sh
-source $DOTFILES/personal/general-functions.sh
-# source $DOTFILES/team/functions
+# Source all files under $HOME/.config/sources/
+for file in $HOME/.config/sources/*.sh; do
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
 
 # LF config
 export EDITOR="nvim"
@@ -28,9 +26,6 @@ xinput list | grep Wacom | sed -n 's/.*id=\([0-9]*\).*/\1/p' | xargs -I {} xsetw
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-source <(kubectl completion zsh)
-# source $ZSH/plugins/git/git.plugin.zsh
-source <(gh completion -s zsh)
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -111,8 +106,7 @@ eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 eval "$(gh copilot alias -- zsh)"
 [ -s "drv" ] && \. source <(drv completion zsh)
+source <(kubectl completion zsh)
+source <(gh completion -s zsh)

@@ -688,10 +688,6 @@ require('lazy').setup {
           name = 'personal',
           path = '~/second-brain/personal',
         },
-        {
-          name = 'default',
-          path = '~/second-brain/default',
-        },
       },
       mappings = {
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
