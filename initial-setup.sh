@@ -15,7 +15,7 @@ echo "####################################################"
 echo "#   2. Installing packages                         #"
 echo "####################################################"
 
-sudo apt install p7zip-full libsecret-tools git python3 python3-pip python-is-python3 zsh curl fonts-powerline flameshot build-essential regolith-desktop regolith-session-flashback regolith-look-gruvbox i3xrocks-battery i3xrocks-memory gpg pass ripgrep direnv -y
+sudo apt install p7zip-full libsecret-tools git python3 python3-pip python-is-python3 zsh curl fonts-powerline flameshot build-essential regolith-desktop regolith-session-flashback regolith-look-gruvbox i3xrocks-battery i3xrocks-memory gpg pass ripgrep direnv libreadline-dev -y
 
 sudo snap install code obsidian --classic
 sudo snap install --beta nvim --classic
