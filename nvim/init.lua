@@ -230,25 +230,28 @@ require('lazy').setup {
     config = function()
       require('copilot').setup()
     end,
-  },
-  {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    version = '*',
-    event = 'VeryLazy',
-    dependencies = {
-      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
-      { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log wrapper
-    },
-    build = 'make tiktoken', -- Only on MacOS or Linux
     opts = {
-      model = 'gpt-4o-2024-11-20', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
-      agent = 'copilot',
-      -- debug = true, -- Enable debugging
-      context = 'buffers',
-      -- See Configuration section for rest
+      copilot_model = 'claude-3-7-sonnet',
     },
-    -- See Commands section for default commands if you want to lazy load on them
   },
+  -- {
+  --   'CopilotC-Nvim/CopilotChat.nvim',
+  --   version = '*',
+  --   event = 'VeryLazy',
+  --   dependencies = {
+  --     { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+  --     { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log wrapper
+  --   },
+  --   build = 'make tiktoken', -- Only on MacOS or Linux
+  --   opts = {
+  --     model = 'claude-3-7-sonnet', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+  --     agent = 'copilot',
+  --     -- debug = true, -- Enable debugging
+  --     context = 'buffers',
+  --     -- See Configuration section for rest
+  --   },
+  --   -- See Commands section for default commands if you want to lazy load on them
+  -- },
   'towolf/vim-helm',
   'xiyaowong/transparent.nvim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -303,7 +306,9 @@ require('lazy').setup {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('go').setup()
+      require('go').setup {
+        tag_transform = 'camelcase',
+      }
     end,
     event = { 'CmdlineEnter' },
     ft = { 'go', 'gomod' },
@@ -617,6 +622,7 @@ require('lazy').setup {
         'golangci-lint',
         'tflint',
         'bash-language-server',
+        'buf',
         'jsonlint',
         'delve',
         'tailwindcss-language-server',
@@ -732,7 +738,7 @@ require('lazy').setup {
   },
   {
     'stevearc/oil.nvim',
-    event = 'VeryLazy',
+    lazy = false,
     opts = {},
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -910,18 +916,41 @@ require('lazy').setup {
     -- change the command in the config to whatever the name of that colorscheme is
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    -- 'ellisonleao/gruvbox.nvim',
-    'folke/tokyonight.nvim',
+    'ellisonleao/gruvbox.nvim',
+    -- 'folke/tokyonight.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
-      vim.o.background = 'dark'
-      -- vim.cmd.colorscheme 'gruvbox'
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.o.background = 'dark'
+      -- vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like
       -- vim.cmd.hi 'Comment gui=none'
+      require('gruvbox').setup {
+        -- terminal_colors = true, -- add neovim terminal colors
+        -- undercurl = true,
+        -- underline = true,
+        -- bold = true,
+        -- italic = {
+        --   strings = true,
+        --   emphasis = true,
+        --   comments = true,
+        --   operators = false,
+        --   folds = true,
+        -- },
+        -- strikethrough = true,
+        -- invert_selection = false,
+        -- invert_signs = false,
+        -- invert_tabline = false,
+        -- inverse = true, -- invert background for search, diffs, statuslines and errors
+        contrast = 'hard', -- can be "hard", "soft" or empty string
+        -- palette_overrides = {},
+        -- overrides = {},
+        -- dim_inactive = false,
+        -- transparent_mode = false,
+      }
+      vim.cmd.colorscheme 'gruvbox'
     end,
   },
   {
@@ -931,11 +960,7 @@ require('lazy').setup {
     lazy = false,
     ---@type snacks.Config
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
       bigfile = { enabled = true },
-      -- dashboard = { enabled = true },
       explorer = {
         enabled = true,
       },
@@ -948,30 +973,13 @@ require('lazy').setup {
         enabled = true,
         formatters = {
           file = {
-            truncate = 80, -- truncate the file path to (roughly) this length
+            truncate = 80,
           },
         },
       },
       notifier = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
-      -- scroll = {
-      --   enabled = true,
-      --   animate = {
-      --     duration = { step = 10, total = 100 },
-      --     easing = 'linear',
-      --   },
-      --   -- faster animation when repeating scroll after delay
-      --   animate_repeat = {
-      --     delay = 100, -- delay in ms before using the repeat animation
-      --     duration = { step = 10, total = 50 },
-      --     easing = 'linear',
-      --   },
-      --   -- what buffers to animate
-      --   filter = function(buf)
-      --     return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= 'terminal'
-      --   end,
-      -- },
       statuscolumn = { enabled = true },
       words = { enabled = true },
     },
@@ -1471,7 +1479,8 @@ require('lazy').setup {
     opts = {
       -- add any opts here
       -- for example
-      provider = 'claude',
+      provider = 'copilot',
+      -- provider = 'claude',
       claude = {
         endpoint = 'https://api.anthropic.com',
         model = 'claude-3-5-haiku-20241022',

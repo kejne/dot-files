@@ -74,6 +74,8 @@ vim.keymap.set('x', '<leader>de', ':lua require("dapui").eval()<CR>', { desc = '
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste and keep buffer', noremap = true, silent = true })
 vim.keymap.set('x', '<leader>y', '"+y', { desc = 'Copy to system clipboard', noremap = true, silent = true })
 
+vim.keymap.set('n', '<leader>H', ':Rest run<CR>', { desc = 'Run Rest [H]ttp' })
+
 -- vim.keymap.set('n', '<leader>zp', ':ZenMode | Pencil<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>tw', ':Twilight<CR>', { desc = '[T]oggle T[W]ilight', noremap = true, silent = true })

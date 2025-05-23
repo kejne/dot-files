@@ -37,11 +37,3 @@ awssh() {
     aws-vault exec $1 -- zsh
   fi
 }
-
-v() {
-  if [[ -z $1 ]]; then
-    nvim
-  else
-    [[ -f $1 ]] && nvim $1 || (z $1 && nvim .)
-  fi
-}
