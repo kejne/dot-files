@@ -962,7 +962,7 @@ require('lazy').setup {
       explorer = {
         enabled = true,
       },
-      indent = { enabled = true },
+      -- indent = { enabled = true },
       input = { enabled = true },
       picker = {
         files = {
