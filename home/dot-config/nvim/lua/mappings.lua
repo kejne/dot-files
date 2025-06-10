@@ -1,6 +1,9 @@
+---@diagnostic disable: undefined-global
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
+vim.keymap.set('n', '<leader>cc', ':lua if vim.wo.cursorcolumn then vim.wo.cursorcolumn = false else vim.wo.cursorcolumn = true end<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -21,6 +24,7 @@ vim.keymap.set('n', '<Tab>', ':lua require("harpoon.ui").nav_next()<CR>', { desc
 vim.keymap.set('n', '<S-Tab>', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Next Harpoon', noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>v', ':vsplit<CR>', { desc = 'Verical Split', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>-', ':split<CR>', { desc = 'Horizontal Split', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>ba', ':%bd|e#|bd#<CR>', { desc = 'Close [B]uffer [A]ll', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>bb', ':bd<CR>', { desc = 'Close [BB]uffer', noremap = true, silent = true })
 
@@ -38,9 +42,6 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Go down and center' })
 vim.keymap.set('n', '<leader>ra', ':lua require("spectre").toggle()<CR>', { desc = '[R]eplace [A]ll', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>rw', ':lua require("spectre").open_visual({select_word = true})<CR>', { desc = '[R]eplace [A]ll', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>rr', ':lua require("spectre").open_file_search({select_word = true})<CR>', { desc = '[R]eplace', noremap = true, silent = true })
-
-vim.keymap.set('n', '<leader>xq', ':Trouble quickfix<CR>', { desc = '[X] Error [Q]uickfix', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>xx', ':Trouble diagnostics<CR>', { desc = '[X] Error E[X]plore', noremap = true, silent = true })
 
 vim.keymap.set('n', 'gp', ':GoImports<CR>', { desc = '[G]o I[M]ports', noremap = true, silent = true })
 vim.keymap.set('n', 'gav', ':GoAltV<CR>', { desc = '[G]o [A]lternate [V]split', noremap = true, silent = true })
@@ -78,19 +79,6 @@ vim.keymap.set('n', '<leader>H', ':Rest run<CR>', { desc = 'Run Rest [H]ttp' })
 -- vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { desc = '[Z]en mode', noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>tw', ':Twilight<CR>', { desc = '[T]oggle T[W]ilight', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gd', ':DiffviewfileHistory %<CR>', { desc = '[G]it [D]iff History', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>gc', ':ChatGPT<CR>', { desc = 'Chat[G]pt [C]hat', noremap = true, silent = true })
-vim.keymap.set('n', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
-vim.keymap.set('v', '<leader>gr', ':ChatGPTRun ', { desc = 'Chat[G]pt [R]un' })
-vim.keymap.set('v', '<leader>ge', ':ChatGPTEditWithInstructions<CR>', { desc = 'Chat[G]pt [E]dit With Instructions' })
 
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move highlighted line up', silent = true })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move highlighted line down', silent = true })
-
-vim.keymap.set('n', '<leader>cc', ':CopilotChat<CR>', { desc = '[C]opilot [C]hat' })
-vim.keymap.set('x', '<leader>cc', ':CopilotChat<CR>', { desc = '[C]opilot [C]hat' })
-vim.keymap.set('x', '<leader>cq', function()
-  local input = vim.fn.input 'Quick Chat: '
-  if input ~= '' then
-    require('CopilotChat').ask(input .. '. No explainations.', { selection = require('CopilotChat.select').visual })
-  end
-end, { desc = 'CopilotChat - Quick chat' })
