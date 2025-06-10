@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.number = true
@@ -686,7 +688,7 @@ require('lazy').setup {
       workspaces = {
         {
           name = 'personal',
-          path = '~/second-brain/personal',
+          path = '~/second-brain',
         },
       },
       mappings = {

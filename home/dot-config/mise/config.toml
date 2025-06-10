@@ -14,7 +14,6 @@ rust = "latest"
 starship = "latest"
 "ubi:gokcehan/lf" = "latest"
 "ubi:kovidgoyal/kitty" = "latest"
-zoxide = "latest"
 
 [settings]
 experimental = true
