@@ -15,7 +15,7 @@ add_newline = true
 
 [kubernetes]
 disabled = false
-style = 'italic cyan'
+style = 'italic yellow'
 format = '[⎈$context]($style)|[$namespace]($style) 📁'
 
 [[kubernetes.contexts]]
