@@ -16,21 +16,25 @@ awssh() {
 }
 
 z() {
-	if [[ $# -eq 1 ]]; then
-		selected=$1
+	if [[ $# -ge 1 ]]; then
+		selected=$(find ~/git/github.com/ ~/git/src/github.com -mindepth 1 -type d 2>/dev/null | \
+			sed "s|^$HOME/||" | \
+			fzf --filter "$(echo $@)" | head -1
+		)
 	else
 		selected=$(find ~/git/github.com/ ~/git/src/github.com -mindepth 1 -type d 2>/dev/null | \
 			sed "s|^$HOME/||" | \
 			fzf --tmux
 		)
-		# Add home path back
-		if [[ -n "$selected" ]]; then
-			selected="$HOME/$selected"
-		fi
+	fi
+
+	# Add home path back
+	if [[ -n "$selected" ]]; then
+		selected="$HOME/$selected"
 	fi
 
 	if [[ -z $selected ]]; then
-		exit 0
+		return
 	fi
 
 	cd "$selected"
