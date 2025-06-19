@@ -15,14 +15,40 @@ awssh() {
   fi
 }
 
-z() {
+f() {
+	SEARCH_PATH=$HOME/git/src/github.com/
 	if [[ $# -ge 1 ]]; then
-		selected=$(find ~/git/github.com/ ~/git/src/github.com -mindepth 1 -type d 2>/dev/null | \
+		selected=$(find $SEARCH_PATH -mindepth 1 -type d 2>/dev/null | \
+			sed "s|^$SEARCH_PATH||" | \
+			fzf --filter "$(echo $@)" | head -1
+		)
+	else
+		selected=$(find $SEARCH_PATH -mindepth 1 -type d 2>/dev/null | \
+			sed "s|^$SEARCH_PATH||" | \
+			fzf --tmux
+		)
+	fi
+
+	# Add home path back
+	if [[ -n "$selected" ]]; then
+		selected="$SEARCH_PATH/$selected"
+	fi
+
+	if [[ -z $selected ]]; then
+		return
+	fi
+
+	cd "$selected"
+}
+
+h() {
+	if [[ $# -ge 1 ]]; then
+		selected=$(find ~/ -maxdepth 5 -mindepth 1 -type d 2>/dev/null | \
 			sed "s|^$HOME/||" | \
 			fzf --filter "$(echo $@)" | head -1
 		)
 	else
-		selected=$(find ~/git/github.com/ ~/git/src/github.com -mindepth 1 -type d 2>/dev/null | \
+		selected=$(find ~/ -maxdepth 5 -mindepth 1 -type d 2>/dev/null | \
 			sed "s|^$HOME/||" | \
 			fzf --tmux
 		)

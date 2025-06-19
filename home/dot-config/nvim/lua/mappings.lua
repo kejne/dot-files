@@ -5,6 +5,8 @@ vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
 vim.keymap.set('n', '<leader>cc', ':lua if vim.wo.cursorcolumn then vim.wo.cursorcolumn = false else vim.wo.cursorcolumn = true end<CR>')
 
+vim.keymap.set('n', '<leader>rb', ':bufdo e!<CR>')
+--
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })

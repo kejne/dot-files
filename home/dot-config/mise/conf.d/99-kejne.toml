@@ -2,7 +2,7 @@
 bat = "latest"
 eza = "latest"
 fzf = "latest"
-gh = "latest"
+# gh = "latest"
 go = "latest"
 "go:github.com/erikkinding/sk" = "latest"
 "go:github.com/nats-io/nats-server/v2" = "latest"
