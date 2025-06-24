@@ -1,4 +1,6 @@
 [tools]
+pipx = "latest"
+python = "latest"
 ansible = "latest"
 bat = "latest"
 eza = "latest"
@@ -11,11 +13,15 @@ go = "latest"
 helm = "latest"
 kubectl = "latest"
 nsc = "latest"
-pipx = "latest"
+node = "latest"
+npm = "latest"
 rust = "latest"
 starship = "latest"
 "ubi:gokcehan/lf" = "latest"
 "ubi:kovidgoyal/kitty" = "latest"
+"ubi:GoogleContainerTools/skaffold" = "latest"
+"npm:npx" = "latest"
+"npm:yarn" = "latest"
 
 [settings]
 experimental = true

@@ -1,6 +1,5 @@
 Kubernetes
 onboarding
-<<<<<<< Updated upstream
 offboarding
 Github
 Jira
@@ -22,7 +21,6 @@ Youtube
 =======
 DynamoDB
 serverless
->>>>>>> Stashed changes
 Kustomize
 ArgoCD
 OpenTelemetry
