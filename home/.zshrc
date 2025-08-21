@@ -1,4 +1,4 @@
-export GOPRIVATE=github.com/WirelessCar-WDP,github.com/WDP-*
+export GOPRIVATE=github.com/WirelessCar-*,github.com/WDP-*
 export GOBIN=$HOME/go/bin
 export GOPATH=$HOME/go/bin
 export CARGOBIN=$HOME/.cargo/bin
@@ -6,6 +6,7 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/bin:$HOME/.local/b
 export ZSH="$HOME/.oh-my-zsh"
 export BAT_THEME=gruvbox-dark
 export ANTHROPIC_API_KEY=$(pass show anthropic)
+export GITHUB_TOKEN=$(pass show ghapi)
 
 # Source all files under $HOME/.config/sources/
 for file in $HOME/.config/sources/*.sh; do
@@ -22,10 +23,10 @@ alias lf='lfcd'
 # Map wacom tablet to single monitor
 MONITOR=$(xrandr | grep " connected.*597" | cut -d " " -f 1 -)
 xinput list | grep Wacom | sed -n 's/.*id=\([0-9]*\).*/\1/p' | xargs -I {} xsetwacom --set {} MapToOutput $MONITOR
+
 /usr/bin/setxkbmap -option "ctrl:nocaps"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -102,9 +103,8 @@ alias c='clear'
 eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
-eval "$(mise activate zsh)"
 
-eval "$(gh copilot alias -- zsh)"
-[ -s "drv" ] && \. source <(drv completion zsh)
-source <(kubectl completion zsh)
-source <(gh completion -s zsh)
+command -v "drv" > /dev/null && source <(drv completion zsh)
+command -v "mise" > /dev/null && eval "$(mise activate zsh)"
+command -v "kubectl" > /dev/null && source <(kubectl completion zsh)
+command -v "gh" > /dev/null && source <(gh completion -s zsh) && eval "$(gh copilot alias -- zsh)"

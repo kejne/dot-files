@@ -18,14 +18,16 @@ getbranch() {
 }
 
 # Push all to existing PR
-push-all () {
+gpush () {
+  local MSG
   if [ "$#" -ne 1 ]; then
-     echo "Usage example: push-all \"Commit message\""
-     exit 1;
+    MSG="backup"
+  else
+    MSG=$1
   fi
 
   git add .
-  git commit -m $1
+  git commit -m $MSG
   git push
 }
 

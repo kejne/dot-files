@@ -1,15 +1,11 @@
 [tools]
-pipx = "latest"
 python = "latest"
-ansible = "latest"
+pipx = "latest"
 bat = "latest"
 eza = "latest"
 fzf = "latest"
 gh = "latest"
 go = "latest"
-"go:github.com/erikkinding/sk" = "latest"
-"go:github.com/nats-io/nats-server/v2" = "latest"
-"go:github.com/nats-io/natscli/nats" = "latest"
 helm = "latest"
 kubectl = "latest"
 nsc = "latest"
@@ -17,11 +13,18 @@ node = "latest"
 npm = "latest"
 rust = "latest"
 starship = "latest"
+"go:github.com/erikkinding/sk" = "latest"
+"go:github.com/nats-io/nats-server/v2" = "latest"
+"go:github.com/nats-io/natscli/nats" = "latest"
 "ubi:gokcehan/lf" = "latest"
 "ubi:kovidgoyal/kitty" = "latest"
 "ubi:GoogleContainerTools/skaffold" = "latest"
 "npm:npx" = "latest"
 "npm:yarn" = "latest"
+ansible = "latest"
 
 [settings]
 experimental = true
+
+[settings.python]
+compile = false
