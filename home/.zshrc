@@ -6,6 +6,7 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/.local/go/bin:$HOME/bin:$HOME/.local/b
 export ZSH="$HOME/.oh-my-zsh"
 export BAT_THEME=gruvbox-dark
 export ANTHROPIC_API_KEY=$(pass show anthropic)
+export TAVILY_API_KEY=$(pass show tavily)
 export GITHUB_TOKEN=$(pass show ghapi)
 
 # Source all files under $HOME/.config/sources/
@@ -108,3 +109,7 @@ command -v "drv" > /dev/null && source <(drv completion zsh)
 command -v "mise" > /dev/null && eval "$(mise activate zsh)"
 command -v "kubectl" > /dev/null && source <(kubectl completion zsh)
 command -v "gh" > /dev/null && source <(gh completion -s zsh) && eval "$(gh copilot alias -- zsh)"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"

@@ -25,3 +25,7 @@ alias pdocs='cd ~/second-brain/personal && nvim'
 alias pdots='cd ~/.config/dotfiles/personal && nvim'
 alias docs='cd ~/second-brain/personal && nvim'
 alias dots='cd ~/.config/dotfiles/personal && nvim'
+
+# Mise
+alias mtl='mise tasks ls'
+alias mr='mise run'

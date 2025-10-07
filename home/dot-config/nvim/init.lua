@@ -212,12 +212,10 @@ require('lazy').setup {
     -- this is equalent to setup({}) function
   },
   {
-    'iamcco/markdown-preview.nvim',
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    ft = { 'markdown' },
-    build = function()
-      vim.fn['mkdp#util#install']()
-    end,
+    'brianhuster/live-preview.nvim',
+    dependencies = {
+      'folke/snacks.nvim',
+    },
   },
   {
     'nvim-pack/nvim-spectre',

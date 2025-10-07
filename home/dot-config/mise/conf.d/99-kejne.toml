@@ -19,9 +19,12 @@ starship = "latest"
 "ubi:gokcehan/lf" = "latest"
 "ubi:kovidgoyal/kitty" = "latest"
 "ubi:GoogleContainerTools/skaffold" = "latest"
+"ubi:mrjosh/helm-ls" = "latest"
 "npm:npx" = "latest"
 "npm:yarn" = "latest"
+"npm:yaml-language-server" = "latest"
 ansible = "latest"
+velero = "latest"
 
 [settings]
 experimental = true
